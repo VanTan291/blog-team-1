@@ -1,25 +1,19 @@
-#clone sourcecode
-
+# clone sourcecode
 git clone
 
-#set up project
-
+# set up project
 composer install
 npm install
 
-#copy file .env
-
+# copy file .env
 cp .env.example .env
 
-#create key project
-
+# create key project
 php artisan key:generate
 
-#run database
-
+# run database
 php artisan migrate
 php artisan db:seed
 
-#run project 
-
+# run project
 php artisan serve
