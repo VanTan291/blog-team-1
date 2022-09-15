@@ -1,5 +1,5 @@
 # clone sourcecode
-git clone
+git clone git@github.com:VanTan291/blog-team-1.git
 
 # set up project
 composer install
