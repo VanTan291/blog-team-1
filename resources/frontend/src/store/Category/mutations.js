@@ -1,4 +1,4 @@
-import states from "./states";
+import states from "./state";
 
 export default {
     CATEGORIES(states, categories) {

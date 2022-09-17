@@ -1,5 +1,5 @@
-import states from "./states";
+import state from "./state";
 
 export default {
-    getCategories: states => states.categories,
+    getCategories: state => state.categories,
 }

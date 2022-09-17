@@ -2,22 +2,22 @@
     <div class="container mt-5 bg-light p-2">
         <div class="row">
             <div class="col">
-                <form class="bg-white p-2 rounded-cs d-flex flex-column">
+                <form class="bg-white p-2 rounded-cs d-flex flex-column" @submit.prevent="createCategory">
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group input-group-outline my-3">
-                                <input type="email" class="form-control" placeholder="category name">
+                                <input type="text" v-model="category.name" class="form-control" placeholder="category name">
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group input-group-outline my-3">
-                                <input type="email" class="form-control">
+                                <input type="text" v-model="category.status" class="form-control">
                             </div>
                         </div>
                     </div>
-                    <button type="button" class="btn-slack btn btn-icon align-self-end">
+                    <button type="submit" class="btn-slack btn btn-icon align-self-end">
                         <span class="btn-inner--text">add new</span>
                     </button>
                 </form>
@@ -39,7 +39,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="cate in listCategory" :key="cate.id">
+                                <tr v-for="cate in listCategory.data" :key="cate.id">
                                     <td>
                                         <div class=" px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
@@ -74,7 +74,10 @@ import { mapActions, mapGetters } from 'vuex';
 export default {
     data() {
         return {
-            //
+            category: {
+                name: '',
+                status: '',
+            }
         }
     },
     mounted() {
@@ -84,7 +87,20 @@ export default {
     methods: {
         ...mapActions({
             getListCategories: 'Category/getCategories',
+            storeCategory: 'Category/storeCategory',
         }),
+
+        createCategory() {
+            this.storeCategory(this.category).then(result => {
+                if(result.data.code == 200) {
+                    this.getListCategories();
+                }else{
+                    console.log(result);
+                }
+            }).catch(error => {
+                console.log(error.message);
+            });
+        }
     },
     computed: {
         ...mapGetters({
