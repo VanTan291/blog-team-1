@@ -3,7 +3,7 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-import Category from './category/category';
+import Category from './Category/Category';
 
 export default new Vuex.Store({
     modules: {

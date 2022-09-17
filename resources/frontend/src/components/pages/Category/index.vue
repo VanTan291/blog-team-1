@@ -39,16 +39,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="categories in category" :key="category.id">
+                                <tr v-for="cate in listCategory" :key="cate.id">
                                     <td>
                                         <div class=" px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0">{{ category.name }}</h6>
+                                                <h6 class="mb-0">{{ cate.name }}</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td class="text-sm">
-                                        <span class="badge bg-success">{{ category.status }}</span>
+                                        <span class="badge bg-success">{{ cate.status }}</span>
                                     </td>
                                     <td class="d-flex justify-content-center">
                                         <button type="button" class="btn btn-facebook my-0 mx-1 p-2 f-item">
@@ -72,8 +72,6 @@
 import { mapActions, mapGetters } from 'vuex';
 
 export default {
-    name: 'CategoryComponent',
-
     data() {
         return {
             //
@@ -90,7 +88,7 @@ export default {
     },
     computed: {
         ...mapGetters({
-            categories: 'Category/getCategories',
+            listCategory: 'Category/getCategories',
         })
     },
 }
