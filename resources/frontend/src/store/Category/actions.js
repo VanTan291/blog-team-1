@@ -1,8 +1,8 @@
 import api from '../../configs/api';
 
 export default {
-    async getCategories({ commit }) {
-        const { data } = await api.get('/categories');
+    async getCategories({ commit }, page) {
+        const { data } = await api.get('/categories?page=' + page + '&page_size=5');
         if (data.data.data) {
             commit('CATEGORIES', data.data);
         }

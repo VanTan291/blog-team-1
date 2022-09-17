@@ -61,6 +61,7 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <pagination :data="listCategory" @pagination-change-page="getListCategories"></pagination>
                     </div>
                 </div>
             </div>
@@ -70,18 +71,21 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import { utils } from '../../../helper/function';
 
 export default {
+    mixins: [utils],
     data() {
         return {
             category: {
                 name: '',
                 status: '',
-            }
+            },
+            page: 1,
         }
     },
     mounted() {
-        this.getListCategories();
+        this.getListCategories(this.page);
     },
 
     methods: {
@@ -93,7 +97,8 @@ export default {
         createCategory() {
             this.storeCategory(this.category).then(result => {
                 if(result.data.code == 200) {
-                    this.getListCategories();
+                    this.getListCategories(this.page);
+                    this.toastSuccess('Create category success');
                 }else{
                     console.log(result);
                 }
