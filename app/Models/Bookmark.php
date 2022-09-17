@@ -21,7 +21,7 @@ class Bookmark extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     /**
@@ -31,6 +31,6 @@ class Bookmark extends Model
      */
     public function blogs()
     {
-        return $this->belongsTo(Blog::class, 'id', 'blog_id');
+        return $this->belongsTo(Blog::class, 'blog_id', 'id');
     }
 }
