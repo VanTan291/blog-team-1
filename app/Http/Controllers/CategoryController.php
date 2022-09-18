@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
+use App\Models\Category;
 use App\Services\Api\CategoryService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -35,6 +36,32 @@ class CategoryController extends BaseController
 
         if ($result['status'] == Response::HTTP_CREATED) {
             return $this->responseSuccess([
+                'code' => Response::HTTP_OK
+            ]);
+        }
+
+        return $this->responseErrors($result['message']);
+    }
+
+    public function show(Category $category)
+    {
+        if ($category) {
+            return $this->responseSuccess([
+                'data' => new CategoryResource($category),
+                'code' => Response::HTTP_OK
+            ]);
+        }
+       
+        return $this->responseErrors('Category not found');
+    }
+
+    public function update(Category $category, CategoryRequest $request)
+    {
+        $result = $this->categoryService->update($request->validated(), $category);
+
+        if ($result['status'] == Response::HTTP_OK) {
+            return $this->responseSuccess([
+                'data' => new CategoryResource($category),
                 'code' => Response::HTTP_OK
             ]);
         }

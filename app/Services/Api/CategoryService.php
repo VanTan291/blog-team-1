@@ -51,4 +51,23 @@ class CategoryService extends BaseService
             ];
         }
     }
+
+    public function update($params, $category)
+    {
+        try {
+            $category->update($params);
+
+            if ($category) {
+                return [
+                    'status' => Response::HTTP_OK,
+                    'data' => $category,
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'status' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
 }
