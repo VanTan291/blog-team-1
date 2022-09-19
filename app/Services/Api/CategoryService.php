@@ -70,4 +70,22 @@ class CategoryService extends BaseService
             ];
         }
     }
+
+    public function destroy($category)
+    {
+        try {
+            $category->delete();
+
+            if ($category) {
+                return [
+                    'status' => Response::HTTP_OK,
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'status' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
 }

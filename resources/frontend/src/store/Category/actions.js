@@ -48,5 +48,16 @@ export default {
             console.log(error);
             return false
         });
+    },
+
+    async deleteCategory({}, id) {
+        return await api.delete('/categories/' + id).then((response) => {
+            if (response && response != undefined) {
+                return response
+            }
+        }).catch((error) => {
+            console.log(error);
+            return false
+        });
     }
 }

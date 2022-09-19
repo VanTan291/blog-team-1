@@ -56,7 +56,7 @@
                                             @click="show(cate.id)">
                                             <span class="btn-inner--text">edit</span>
                                         </button>
-                                        <button type="button" class="btn btn-youtube my-0 mx-1 p-2 f-item">
+                                        <button type="button" class="btn btn-youtube my-0 mx-1 p-2 f-item" @click="destroy(cate.id)">
                                             <span class="btn-inner--text">delete</span>
                                         </button>
                                     </td>
@@ -101,6 +101,7 @@ export default {
             storeCategory: 'Category/storeCategory',
             showCategory: 'Category/showCategory',
             updateCategory: 'Category/updateCategory',
+            deleteCategory: 'Category/deleteCategory',
         }),
 
         async updateOrCreate() {
@@ -114,6 +115,7 @@ export default {
                         }
                         this.toastSuccess('Update category success');
                     } else {
+                        this.toastSuccess('Update category fail');
                         console.log(result);
                     }
                 }).catch(error => {
@@ -129,6 +131,7 @@ export default {
                         }
                         this.toastSuccess('Create category success');
                     } else {
+                        this.toastSuccess('Create category fail');
                         console.log(result);
                     }
                 }).catch(error => {
@@ -136,23 +139,6 @@ export default {
                 });
             }
         },
-
-        // async createCategory() {
-        //     await this.storeCategory(this.category).then(result => {
-        //         if (result.data.code == 200) {
-        //             this.getListCategories(this.page);
-        //             this.category = {
-        //                 name: '',
-        //                 status: true,
-        //             }
-        //             this.toastSuccess('Create category success');
-        //         } else {
-        //             console.log(result);
-        //         }
-        //     }).catch(error => {
-        //         console.log(error.message);
-        //     });
-        // },
 
         show(categoryId) {
             this.showCategory(categoryId).then(result => {
@@ -166,22 +152,19 @@ export default {
             });
         },
 
-        // async updateCategory() {
-        //     await this.updateCategory(this.category).then(result => {
-        //         if (result.data.code == 200) {
-        //             this.getListCategories(this.page);
-        //             this.category = {
-        //                 name: '',
-        //                 status: true,
-        //             }
-        //             this.toastSuccess('Update category success');
-        //         } else {
-        //             console.log(result);
-        //         }
-        //     }).catch(error => {
-        //         console.log(error.message);
-        //     });
-        // },
+        destroy(category) {
+            this.deleteCategory(category).then(result => {
+                if (result.data.code == 200) {
+                    this.getListCategories(this.page);
+                    this.toastSuccess('Delete category success');
+                } else {
+                    this.toastSuccess('Delete category fail');
+                    console.log(result);
+                }
+            }).catch(error => {
+                console.log(error.message);
+            });
+        }
     },
 
     computed: {

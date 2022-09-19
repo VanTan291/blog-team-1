@@ -68,4 +68,17 @@ class CategoryController extends BaseController
 
         return $this->responseErrors($result['message']);
     }
+
+    public function destroy(Category $category)
+    {
+        $result = $this->categoryService->destroy($category);
+
+        if ($result['status'] == Response::HTTP_OK) {
+            return $this->responseSuccess([
+                'code' => Response::HTTP_OK
+            ]);
+        }
+
+        return $this->responseErrors($result['message']);
+    }
 }
