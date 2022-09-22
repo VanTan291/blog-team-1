@@ -1,7 +1,7 @@
 <template src="./register.html"></template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: "register",
@@ -18,11 +18,14 @@ export default {
     }),
   },
   methods: {
+    ...mapActions({
+        registerAccount: 'Auth/register'
+    }),
     async register() {
         this.loader = true;
         this.isDisable = true;
 
-        await this.$store.dispatch('Auth/register', this.params)
+        await this.registerAccount(this.params)
         .then(result => {
             if (result.code == 200) {
                 this.$router.push({ name: 'verify' })
