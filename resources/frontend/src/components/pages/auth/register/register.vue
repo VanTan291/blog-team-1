@@ -28,6 +28,15 @@ export default {
         await this.registerAccount(this.params)
         .then(result => {
             if (result.code == 200) {
+                this.$notify({
+                    group: 'auth',
+                    type: 'success',
+                    title: 'Thông báo',
+                    text: result.message,
+                    duration: 3000,
+                    speed: 300
+                });
+
                 this.$router.push({ name: 'verify' })
             }
 

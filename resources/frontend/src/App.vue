@@ -1,11 +1,12 @@
 <template>
     <div id="app">
-      <router-view />
+        <notifications group="auth" position="top right" />
+        <router-view />
     </div>
-  </template>
+</template>
 
-  <script>
-  export default {
-    name: 'App'
-  }
-  </script>
+<script>
+export default {
+name: 'App'
+}
+</script>

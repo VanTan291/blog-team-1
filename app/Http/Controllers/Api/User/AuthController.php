@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Api\User\RegisterRequest;
 use App\Services\Api\User\AuthService;
 use Illuminate\Http\Response;
+use App\Http\Requests\Api\User\VerifyEmailRequest;
+use App\Http\Requests\Api\User\ReSendVerifyEmailRequest;
 
 /**
  * Class AuthController
@@ -59,6 +61,58 @@ class AuthController extends Controller
                 [
                     'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
                     'message' => __('auth.register_error'),
+                ]
+            );
+        }//end try
+    }
+
+    /**
+     * Verify email code.
+     *
+     * @param VerifyEmailRequest $request Including email and code.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function verifyEmailCode(VerifyEmailRequest $request)
+    {
+        $verify = $this->authService->verifyEmailCode($request->validated());
+
+        if ($verify['code'] != Response::HTTP_OK) {
+            return response()->apiErrors($verify);
+        }
+
+        return response()->apiSuccess($verify);
+    }
+
+    /**
+     * Resend verify email code.
+     *
+     * @param ReSendVerifyEmailRequest $request Including email.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function reSendVerifyEmail(ReSendVerifyEmailRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $resend = $this->authService->reSendVerifyEmail($request->email);
+
+            if ($resend['code'] != Response::HTTP_OK) {
+                return response()->apiErrors($resend);
+            }
+
+            DB::commit();
+
+            return response()->apiSuccess($resend);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            DB::rollBack();
+
+            return response()->apiErrors(
+                [
+                    'message' => __('auth.send_email_verify_code_error'),
+                    'code' => Response::HTTP_INTERNAL_SERVER_ERROR
                 ]
             );
         }//end try

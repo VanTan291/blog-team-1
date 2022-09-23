@@ -75,6 +75,79 @@ class AuthService extends BaseService
     }
 
     /**
+     * This is method for verify email code.
+     *
+     * @param array $params This is data including email and code for verify email.
+     *
+     * @return array This is response data including status and message.
+     */
+    public function verifyEmailCode(array $params)
+    {
+        $user = $this->user
+            ->where('email', $params['email'])
+            ->first();
+
+        if ($user->email_verify_code != $params['code']) {
+            return [
+                'code' => Response::HTTP_UNAUTHORIZED,
+                'message' => __('auth.email_verify_code_error'),
+            ];
+        }
+
+        $user->update(
+            [
+                'status' => UserStatus::ACTIVE,
+                'email_verify_code' => null,
+                'email_verified_at' => now(),
+            ]
+        );
+
+        return [
+            'code' => Response::HTTP_OK,
+            'token' => $this->respondWithToken(auth('api')->login($user)),
+            'message' => __('auth.email_verify_success'),
+        ];
+    }
+
+    /**
+     * This is method for send email verify code.
+     *
+     * @param string $email This is email for send email verify code.
+     *
+     * @return string This is email verify code.
+     */
+    public function reSendVerifyEmail(string $email)
+    {
+        $user = $this->user
+            ->select('id', 'email_verify_code')
+            ->where('email', $email)
+            ->first();
+
+        if (!$user) {
+            return [
+                'message' => __('auth.not_found'),
+                'code' => Response::HTTP_UNAUTHORIZED
+            ];
+        }
+
+        $code = $this->sendEmailVerifyCode($email);
+
+        if (!$code) {
+            return [
+                'message' => __('auth.send_email_verify_code_error'),
+                'code' => Response::HTTP_SERVICE_UNAVAILABLE
+            ];
+        }
+
+        $user->update(['email_verify_code' => $code]);
+
+        return [
+            'message' => __('auth.resend_verify_email_success'),
+            'code' => Response::HTTP_OK
+        ];
+    }
+
+    /**
      * Send verify code user.
      *
      * @param string $email Email of user.

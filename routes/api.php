@@ -22,6 +22,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [UserController::class, 'login']);
 Route::post('logout', [UserController::class, 'logout']);
 Route::POST('register', [AuthController::class, 'register'])->name('register');
+Route::POST('verify-email', [AuthController::class, 'verifyEmailCode'])->name('verify_email_code');
+Route::POST('re-send-verify-email', [AuthController::class, 'reSendVerifyEmail'])->name('re_send_verify_email');
 
 Route::middleware('auth:api')->get('/user', function(Request $request){
     return $request->user();
