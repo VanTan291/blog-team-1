@@ -15,6 +15,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Enums\UserRole;
 use App\Mail\SendMailVerify;
+use Illuminate\Support\Facades\Auth;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
  * Class AuthService
@@ -72,6 +74,49 @@ class AuthService extends BaseService
                 'message' => __('auth.register_error'),
             ];
         }//end try
+    }
+
+    public function login($inputs)
+    {
+
+        $token = null;
+        $response = null;
+
+        if ($token = JWTAuth::attempt(['email' => $inputs['email'], 'password' => $inputs['password']])) {
+            $response = [
+                'code' => Response::HTTP_OK,
+                'response' => __('auth.success'),
+                'result' => [
+                    'token' => $token,
+                ],
+            ];
+        } else {
+            $response = [
+                'code' => Response::HTTP_BAD_REQUEST,
+                'response' => 'error',
+                'message' => __('auth.login_error'),
+            ];
+        }
+
+        return $response;
+    }
+
+    public function logout()
+    {
+        if(Auth::check() == false)
+        {
+            return [
+                'code' => Response::HTTP_UNAUTHORIZED,
+                'message' =>  __('auth.unauthorized'),
+            ];
+        }
+
+        Auth::guard('api')->logout();
+
+        return [
+            'code' => Response::HTTP_OK,
+            'message' => __('auth.logout_success'),
+        ];
     }
 
     /**
