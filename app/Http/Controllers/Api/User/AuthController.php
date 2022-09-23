@@ -12,9 +12,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Api\User\RegisterRequest;
 use App\Services\Api\User\AuthService;
+use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 /**
@@ -43,8 +45,10 @@ class AuthController extends Controller
     {
         try {
             DB::beginTransaction();
+
             $register = $this->authService
                 ->register($request->validated());
+
             if ($register['code'] != Response::HTTP_OK) {
                 return response()->apiErrors($register);
             }
@@ -101,7 +105,7 @@ class AuthController extends Controller
                     'message' => __('auth.login_error'),
                 ], 500
             );
-        }//end try
+        }
 
     }
 

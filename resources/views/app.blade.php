@@ -28,6 +28,7 @@
 
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets/css/material-kit.css?v=3.0.4') }}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
 
     @stack('styles')
 </head>
