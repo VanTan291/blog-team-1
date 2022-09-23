@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\User\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Api\User\RegisterRequest;
@@ -49,6 +50,7 @@ class AuthController extends Controller
             $register = $this->authService
                 ->register($request->validated());
 
+
             if ($register['code'] != Response::HTTP_OK) {
                 return response()->apiErrors($register);
             }
@@ -69,59 +71,26 @@ class AuthController extends Controller
         }//end try
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        try {
-            DB::beginTransaction();
-            Config::set('jwt.user', 'App\User');
-            Config::set('auth.providers.users.model', \App\User::class);
-            $token = null;
+        $login =  $this->authService->login($request->all());
 
-            if ($token = JWTAuth::attempt(['email' => $request->email, 'password' => $request->password])) {
-                return response()->json([
-                    'code' => Response::HTTP_OK,
-                    'response' => __('auth.success'),
-                    'result' => [
-                        'token' => $token,
-                    ],
-                ], 200);
-            } else {
-                return response()->json([
-                    'code' => Response::HTTP_BAD_REQUEST,
-                    'response' => 'error',
-                    'message' => __('auth.login_error'),
-                ], 400);
-            }
-
-            DB::commit();
-
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
-            DB::rollback();
-
-            return response()->json(
-                [
-                    'code' => Response::HTTP_INTERNAL_SERVER_ERROR,
-                    'message' => __('auth.login_error'),
-                ], 500
-            );
+        if ($login['code'] != Response::HTTP_OK) {
+            return response()->apiErrors($login);
         }
+
+        return response()->apiSuccess($login);
 
     }
 
     public function logout()
     {
-        if(Auth::check() == false)
-        {
-            return response()->json([
-                'code' => Response::HTTP_UNAUTHORIZED,
-                'message' => 'Unauthorized'
-            ], 401);
+        $logout =  $this->authService->logout();
+
+        if ($logout['code'] != Response::HTTP_OK) {
+            return response()->apiErrors($logout);
         }
 
-        Auth::guard('api')->logout();
-        return response()->json([
-            'message' => __('auth.logout_success'),
-        ], 200);
+        return response()->apiSuccess($logout);
     }
 }
