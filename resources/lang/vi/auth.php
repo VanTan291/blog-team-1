@@ -22,4 +22,5 @@ return [
     'login_error' => 'Sai email hoặc password',
     'not_active' => 'Tài khoản chưa được xác thực',
     'not_found' => 'Tài khoản không tồn tại',
+    'logout_success' => 'Đăng xuất thành công',
 ];
