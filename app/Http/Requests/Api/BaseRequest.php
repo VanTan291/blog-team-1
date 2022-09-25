@@ -2,10 +2,10 @@
 /**
  * This package is based request on the Laravel Framework.
  *
- * @package App\Http\Reuqest\Api\User
+ * @package App\Http\Reuqest\Api
  */
 
-namespace App\Http\Requests\Api\User;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;

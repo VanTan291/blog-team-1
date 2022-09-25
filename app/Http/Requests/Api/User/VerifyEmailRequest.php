@@ -7,6 +7,7 @@
 
 namespace App\Http\Requests\Api\User;
 
+use App\Http\Requests\Api\BaseRequest;
 /**
  * The request for api verify user.
  */

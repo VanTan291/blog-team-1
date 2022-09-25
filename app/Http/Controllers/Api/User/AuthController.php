@@ -8,7 +8,7 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\api\User\LoginRequest;
+use App\Http\Requests\Api\User\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Api\User\RegisterRequest;

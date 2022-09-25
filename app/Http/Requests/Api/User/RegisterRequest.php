@@ -8,6 +8,7 @@
 namespace App\Http\Requests\Api\User;
 
 use Illuminate\Validation\Rule;
+use App\Http\Requests\Api\BaseRequest;
 
 /**
  * The request for api register user.

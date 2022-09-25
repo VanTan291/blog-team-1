@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api\User;
 
 use Illuminate\Validation\Rule;
+use App\Http\Requests\Api\BaseRequest;
 
 class LoginRequest extends BaseRequest
 {
