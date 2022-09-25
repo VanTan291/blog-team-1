@@ -15,10 +15,11 @@ use App\Http\Requests\Api\User\RegisterRequest;
 use App\Services\Api\User\AuthService;
 use Exception;
 use Illuminate\Http\Response;
+use App\Http\Requests\Api\User\VerifyEmailRequest;
+use App\Http\Requests\Api\User\ReSendVerifyEmailRequest;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Log;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use JWTAuth;
 
 /**
  * Class AuthController
@@ -71,6 +72,58 @@ class AuthController extends Controller
         }//end try
     }
 
+    /**
+     * Verify email code.
+     *
+     * @param VerifyEmailRequest $request Including email and code.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function verifyEmailCode(VerifyEmailRequest $request)
+    {
+        $verify = $this->authService->verifyEmailCode($request->validated());
+
+        if ($verify['code'] != Response::HTTP_OK) {
+            return response()->apiErrors($verify);
+        }
+
+        return response()->apiSuccess($verify);
+    }
+
+    /**
+     * Resend verify email code.
+     *
+     * @param ReSendVerifyEmailRequest $request Including email.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function reSendVerifyEmail(ReSendVerifyEmailRequest $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $resend = $this->authService->reSendVerifyEmail($request->email);
+
+            if ($resend['code'] != Response::HTTP_OK) {
+                return response()->apiErrors($resend);
+            }
+
+            DB::commit();
+
+            return response()->apiSuccess($resend);
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            DB::rollBack();
+
+            return response()->apiErrors(
+                [
+                    'message' => __('auth.send_email_verify_code_error'),
+                    'code' => Response::HTTP_INTERNAL_SERVER_ERROR
+                ]
+            );
+        }//end try
+    }
+
     public function login(LoginRequest $request)
     {
         $login =  $this->authService->login($request->all());
@@ -80,7 +133,6 @@ class AuthController extends Controller
         }
 
         return response()->apiSuccess($login);
-
     }
 
     public function logout()
@@ -92,5 +144,9 @@ class AuthController extends Controller
         }
 
         return response()->apiSuccess($logout);
+    }
+
+    public function me(Request $request) {
+        dd(auth('api')->user());
     }
 }
