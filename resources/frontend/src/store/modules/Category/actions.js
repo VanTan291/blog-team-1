@@ -1,4 +1,4 @@
-import api from '../../configs/api';
+import api from '../../../configs/api';
 
 export default {
     async getCategories({ commit }, page) {
