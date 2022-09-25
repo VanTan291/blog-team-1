@@ -44,7 +44,7 @@ export default {
         return await api.post('verify-email', formData)
             .then(response => {
                 if (response && response != undefined) {
-                    commit('AUTH_TOKEN', response.token);
+                    localStorage.setItem('token', response.token);
                 }
 
                 return response;
