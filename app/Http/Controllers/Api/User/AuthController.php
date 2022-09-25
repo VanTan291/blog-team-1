@@ -8,13 +8,18 @@
 namespace App\Http\Controllers\Api\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\User\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\Api\User\RegisterRequest;
 use App\Services\Api\User\AuthService;
+use Exception;
 use Illuminate\Http\Response;
 use App\Http\Requests\Api\User\VerifyEmailRequest;
 use App\Http\Requests\Api\User\ReSendVerifyEmailRequest;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
+use JWTAuth;
 
 /**
  * Class AuthController
@@ -45,6 +50,7 @@ class AuthController extends Controller
 
             $register = $this->authService
                 ->register($request->validated());
+
 
             if ($register['code'] != Response::HTTP_OK) {
                 return response()->apiErrors($register);
@@ -116,5 +122,31 @@ class AuthController extends Controller
                 ]
             );
         }//end try
+    }
+
+    public function login(LoginRequest $request)
+    {
+        $login =  $this->authService->login($request->all());
+
+        if ($login['code'] != Response::HTTP_OK) {
+            return response()->apiErrors($login);
+        }
+
+        return response()->apiSuccess($login);
+    }
+
+    public function logout()
+    {
+        $logout =  $this->authService->logout();
+
+        if ($logout['code'] != Response::HTTP_OK) {
+            return response()->apiErrors($logout);
+        }
+
+        return response()->apiSuccess($logout);
+    }
+
+    public function me(Request $request) {
+        dd(auth('api')->user());
     }
 }

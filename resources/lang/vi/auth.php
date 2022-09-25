@@ -23,4 +23,6 @@ return [
     'not_active' => 'Tài khoản chưa được xác thực',
     'not_found' => 'Tài khoản không tồn tại',
     'resend_verify_email_success' => 'Mã xác thực đã được gửi thành công',
+    'logout_success' => 'Đăng xuất thành công',
+    'unauthorized' => 'Không tìm thấy người dùng',
 ];
