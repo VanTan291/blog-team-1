@@ -1,3 +1,4 @@
 export default {
     categories: {},
+    errors: {},
 }

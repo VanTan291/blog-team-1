@@ -5,12 +5,16 @@ import VueRouter from 'vue-router';
 import store from "./store";
 import router from "./router";
 import App from './App.vue'
+import VueConfirmDialog from 'vue-confirm-dialog'
 
 // use
 Vue.use(VueRouter);
+Vue.use(VueConfirmDialog)
 Vue.config.productionTip = false
 Vue.component('app', App);
 Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('vue-confirm-dialog', VueConfirmDialog.default)
+
 import Toast from "vue-toastification";
 import "vue-toastification/dist/index.css";
 

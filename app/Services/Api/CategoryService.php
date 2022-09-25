@@ -17,7 +17,7 @@ class CategoryService extends BaseService
     public function index()
     {
         try {
-            $categories = $this->model;
+            $categories = $this->model->latest('id');
 
             if ($categories) {
                 return [

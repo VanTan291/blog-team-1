@@ -4,6 +4,13 @@
             <div class="col">
                 <form class="bg-white p-2 rounded-cs d-flex flex-column" @submit.prevent="updateOrCreate">
                     <div class="row">
+                        <div v-if="getError">
+                            <div v-for="error in getError">
+                                <small id="passwordHelp" class="text-danger">
+                                    {{ error[0] }}
+                                </small>
+                            </div>
+                        </div>
                         <div class="col-md-12">
                             <div class="input-group input-group-outline my-3">
                                 <input type="text" v-model="category.name" class="form-control"
@@ -56,7 +63,8 @@
                                             @click="show(cate.id)">
                                             <span class="btn-inner--text">edit</span>
                                         </button>
-                                        <button type="button" class="btn btn-youtube my-0 mx-1 p-2 f-item" @click="destroy(cate.id)">
+                                        <button type="button" class="btn btn-youtube my-0 mx-1 p-2 f-item"
+                                            @click="destroy(cate.id)">
                                             <span class="btn-inner--text">delete</span>
                                         </button>
                                     </td>
@@ -116,6 +124,7 @@ export default {
                         this.toastSuccess('Update category success');
                     } else {
                         this.toastSuccess('Update category fail');
+                        this.errors = result;
                         console.log(result);
                     }
                 }).catch(error => {
@@ -153,23 +162,36 @@ export default {
         },
 
         destroy(category) {
-            this.deleteCategory(category).then(result => {
-                if (result.data.code == 200) {
-                    this.getListCategories(this.page);
-                    this.toastSuccess('Delete category success');
-                } else {
-                    this.toastSuccess('Delete category fail');
-                    console.log(result);
+            this.$confirm({
+                    message: 'Are you sure?',
+                    button: {
+                        no: 'No',
+                        yes: 'Yes'
+                    },
+                    callback: confirm => {
+                        if (confirm) {
+                            this.deleteCategory(category).then(result => {
+                                if (result.data.code == 200) {
+                                    this.getListCategories(this.page);
+                                    this.toastSuccess('Delete category success');
+                                } else {
+                                    this.toastSuccess('Delete category fail');
+                                    console.log(result);
+                                }
+                            }).catch(error => {
+                                console.log(error.message);
+                            });
+                        }
+                    }
                 }
-            }).catch(error => {
-                console.log(error.message);
-            });
+            )
         }
     },
 
     computed: {
         ...mapGetters({
             listCategory: 'Category/getCategories',
+            getError: 'Category/getErrors',
         })
     },
 }

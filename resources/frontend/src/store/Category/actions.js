@@ -8,33 +8,37 @@ export default {
         }
     },
 
-    async storeCategory({}, parameter) {
+    async storeCategory({commit}, parameter) {
         let formData = new FormData();
         formData.append('status', parameter.status ? 1 : 0); 
         formData.append('name', parameter.name);
 
         return await api.post('/categories', formData).then((response) => {
             if (response && response != undefined) {
+                commit('ERRORS', null);
                 return response
             }
         }).catch((error) => {
-            console.log(error);
+            console.log(error.response.data.errors);
+            commit('ERRORS', error.response.data.errors);
             return false
         });
     },
 
-    async showCategory({}, id) {
+    async showCategory({commit}, id) {
         return await api.get('/categories/' + id).then((response) => {
             if (response && response != undefined) {
+                commit('ERRORS', null);
                 return response
             }
         }).catch((error) => {
             console.log(error);
+            commit('ERRORS', error.response.data.errors);
             return false
         });
     },
 
-    async updateCategory({}, parameter) {
+    async updateCategory({commit}, parameter) {
         let formData = new FormData();
         formData.append('id', parameter.id);
         formData.append('status', parameter.status ? 1 : 0); 
@@ -42,10 +46,12 @@ export default {
 
         return await api.put('/categories/' + parameter.id, parameter).then((response) => {
             if (response && response != undefined) {
+                commit('ERRORS', null);
                 return response
             }
         }).catch((error) => {
             console.log(error);
+            commit('ERRORS', error.response.data.errors);
             return false
         });
     },
