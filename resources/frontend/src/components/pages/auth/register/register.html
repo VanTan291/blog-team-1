@@ -13,29 +13,25 @@
                 <div class="loader" v-if="loader"></div>
                 <form class="text-start" @submit.prevent="register">
                     <div class="input-group input-group-outline my-3">
-                        <label class="form-label">Tên đăng nhập</label>
-                        <input type="name" class="form-control" v-model="params.name">
+                        <input type="name" placeholder="Tên đăng nhập" class="form-control" v-model="params.name">
                     </div>
                     <p class="text-danger" v-if="errorRequest && errorRequest.message.name">
                         {{errorRequest.message.name[0] }}
                     </p>
                     <div class="input-group input-group-outline my-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" v-model="params.email">
+                        <input type="email" placeholder="Email" class="form-control" v-model="params.email">
                     </div>
                     <p class="text-danger" v-if="errorRequest && errorRequest.message.email">
                         {{errorRequest.message.email[0] }}
                     </p>
                     <div class="input-group input-group-outline my-3">
-                        <label class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" v-model="params.password">
+                        <input type="password" placeholder="Mật khẩu" class="form-control" v-model="params.password">
                     </div>
                     <p class="text-danger" v-if="errorRequest && errorRequest.message.password">
                         {{errorRequest.message.password[0] }}
                     </p>
                     <div class="input-group input-group-outline my-3">
-                        <label class="form-label">Nhập lại mật khẩu</label>
-                        <input type="password" class="form-control" v-model="params.password_confirmation">
+                        <input type="password" placeholder="Nhập lại mật khẩu" class="form-control" v-model="params.password_confirmation">
                     </div>
                     <p class="text-danger" v-if="errorRequest && errorRequest.message.password_confirmation">
                         {{errorRequest.message.password_confirmation[0] }}

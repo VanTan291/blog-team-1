@@ -17,19 +17,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::resource('categories', CategoryController::class);
 
 
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 Route::POST('register', [AuthController::class, 'register'])->name('register');
+Route::POST('verify-email', [AuthController::class, 'verifyEmailCode'])->name('verify_email_code');
+Route::POST('re-send-verify-email', [AuthController::class, 'reSendVerifyEmail'])->name('re_send_verify_email');
 
-Route::middleware('auth:api')->get('/user', function(Request $request){
-    return $request->user();
+// Route::middleware('auth:api')->get('/user', function(Request $request){
+//     return $request->user();
+// });
+
+Route::group(['middleware' => ['auth.user']], function () {
+    Route::get('me', [AuthController::class, 'me'])->name('me');
 });
 
 // Route::middleware('auth:api')->group(function () {
