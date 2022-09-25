@@ -15,15 +15,14 @@ export default {
         state.errorRegister = null;
     },
 
-    LOGIN_SUCCESS(state, response) {
-        state.errorRequest = null;
+    AUTH_TOKEN(state, token) {
+        state.token = token
     },
 
     LOGIN_FAIL(state, response) {
-        console.log(response);
         state.errorLogin = response;
     },
     VERIFY_SUCCESS (state) {
         state.errorRequest = null;
-    }
+    },
 }

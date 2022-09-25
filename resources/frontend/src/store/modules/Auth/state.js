@@ -3,4 +3,5 @@ export default {
     errorRegister: null,
     errorLogin: null,
     params: {},
+    token: '',
 }

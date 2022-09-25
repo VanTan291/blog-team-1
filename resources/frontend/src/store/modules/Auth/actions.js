@@ -14,7 +14,7 @@ export default {
                     commit('REGISTER_SUCCESS', response.data);
                 }
 
-                return response.data;
+                return response;
             })
             .catch((error) => {
                 commit('REQUEST_FAIL', error.response.data);
@@ -25,12 +25,14 @@ export default {
         return await api.post('login', params)
             .then(response => {
                 if (response && response != undefined) {
-                    commit('LOGIN_SUCCESS', response.data);
+                    console.log(response);
+                    commit('AUTH_TOKEN', response.token);
                 }
 
-                return response.data;
+                return response;
             })
             .catch((error) => {
+                console.log(error);
                 commit('LOGIN_FAIL', error.response.data);
             })
     },
@@ -43,10 +45,10 @@ export default {
         return await api.post('verify-email', formData)
             .then(response => {
                 if (response && response != undefined) {
-                    commit('VERIFY_SUCCESS', response.data);
+                    commit('AUTH_TOKEN', response.token);
                 }
 
-                return response.data;
+                return response;
             })
             .catch((error) => {
                 commit('REQUEST_FAIL', error.response.data);
@@ -68,5 +70,20 @@ export default {
             .catch((error) => {
                 commit('REQUEST_FAIL', error.response.data);
             })
-    }
+    },
+    async logout({ commit }) {
+        return await api.post('logout')
+            .then(response => {
+                if (response && response != undefined) {
+                    console.log(response);
+                    commit('AUTH_TOKEN', '');
+                }
+
+                return response;
+            })
+            .catch((error) => {
+                console.log(error);
+                commit('LOGIN_FAIL', error.response.data);
+            })
+    },
 };

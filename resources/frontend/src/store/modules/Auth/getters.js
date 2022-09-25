@@ -5,4 +5,5 @@ export default {
     errorRequest: state => state.errorRequest,
     errorLogin: state => state.errorLogin,
     params: state => state.params,
+    token: state => state.token,
 }
