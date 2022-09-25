@@ -17,9 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('categories', CategoryController::class);
-
-
 Route::post('login', [AuthController::class, 'login']);
 Route::post('logout', [AuthController::class, 'logout']);
 Route::POST('register', [AuthController::class, 'register'])->name('register');
@@ -32,8 +29,7 @@ Route::POST('re-send-verify-email', [AuthController::class, 'reSendVerifyEmail']
 
 Route::group(['middleware' => ['auth.user']], function () {
     Route::get('me', [AuthController::class, 'me'])->name('me');
+    Route::resource('tags', TagController::class);
+    Route::resource('categories', CategoryController::class);
 });
 
-// Route::middleware('auth:api')->group(function () {
-    Route::resource('tags', TagController::class);
-// });
