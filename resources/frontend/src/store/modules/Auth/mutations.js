@@ -15,7 +15,14 @@ export default {
         state.errorRegister = null;
     },
 
+    AUTH_TOKEN(state, token) {
+        state.token = token
+    },
+
+    LOGIN_FAIL(state, response) {
+        state.errorLogin = response;
+    },
     VERIFY_SUCCESS (state) {
         state.errorRequest = null;
-    }
+    },
 }

@@ -59,6 +59,11 @@
                     Profile
                   </a>
                 </router-link>
+                <li v-if="checkAuth" @click="logout" tag="li" class="nav-item mx-2">
+                  <a class="nav-link ps-2 d-flex cursor-pointer align-items-center">
+                    Logout
+                  </a>
+                </li>
                 <router-link :to="{ name: 'login' }" tag="li" class="nav-item mx-2">
                   <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" v-bind:class="(urlSegment[1] == 'login') ? 'activeSidebar' : ''">
                     Login
@@ -81,6 +86,7 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
 export default {
   name: 'Navbar',
   data() {
@@ -88,15 +94,30 @@ export default {
       urlSegment: '',
     }
   },
-  methods: {
+  mounted() {
+    this.path();
+  },
+  computed: {
+    ...mapGetters({
+        checkAuth: 'Auth/token'
+    })
+  },
+   methods: {
+    ...mapActions({
+        logoutAuth: 'Auth/logout'
+    }),
     path() {
       this.urlSegment = (new URL(window.location.href)).pathname.split('/');
       return this.urlSegment;
     },
+    async logout() {
+        await this.logoutAuth().then(result => {
+            if (result.code = 200) {
+                this.$router.push({name: 'login'});
+            }
+        })
+    }
   },
-  mounted() {
-    this.path();
-  }
 }
 </script>
 

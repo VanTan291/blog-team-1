@@ -2,9 +2,11 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import {utils} from '../../../../helper/function'
 
 export default {
   name: 'verify',
+  mixins: [utils],
   data() {
     return {
         loader: false,
@@ -32,9 +34,10 @@ export default {
         await this.verifyEmailCode(this.params)
         .then(result => {
             //alert('ss');
-            // if (result.code == 200) {
-            //     this.$router.push({ name: 'verify' })
-            // }
+            if (result.code == 200) {
+                this.toastSuccess(result.message);
+                this.$router.push({ name: 'home' })
+            }
 
             this.loader = false;
             this.isDisable = false;

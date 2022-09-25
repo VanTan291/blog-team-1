@@ -85,15 +85,12 @@ class AuthService extends BaseService
         if ($token = JWTAuth::attempt(['email' => $inputs['email'], 'password' => $inputs['password']])) {
             $response = [
                 'code' => Response::HTTP_OK,
-                'response' => __('auth.success'),
-                'result' => [
-                    'token' => $token,
-                ],
+                'message' => __('auth.success'),
+                'token' => $token
             ];
         } else {
             $response = [
-                'code' => Response::HTTP_BAD_REQUEST,
-                'response' => 'error',
+                'code' => Response::HTTP_FORBIDDEN,
                 'message' => __('auth.login_error'),
             ];
         }
