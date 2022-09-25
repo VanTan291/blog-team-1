@@ -10,23 +10,25 @@
               </div>
             </div>
             <div class="card-body">
-              <form role="form" class="text-start">
-                <div class="input-group input-group-outline my-3">
-                  <label class="form-label">Email</label>
-                  <input type="email" class="form-control" v-model="params.email">
-                </div>
-                <div class="input-group input-group-outline mb-3">
-                  <label class="form-label">Mã code</label>
-                  <input type="text" class="form-control" v-model="params.code">
-                </div>
-                <div class="text-center">
-                  <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Xác thực</button>
-                </div>
-                <p class="mt-4 text-sm text-center">
-                    Gửi lại mã
-                </p>
-                </router-link>
-              </form>
+                <div class="loader" v-if="loader"></div>
+                <form role="form" class="text-start" @submit.prevent="verifyEmail">
+                    <div class="input-group input-group-outline my-3">
+                        <input type="email" placeholder="Email" class="form-control" v-model="params.email">
+                    </div>
+                    <p class="text-danger" v-if="errorRequest && errorRequest.message.email">
+                        {{errorRequest.message.email[0] }}
+                    </p>
+                    <div class="input-group input-group-outline mb-3">
+                        <input type="text" placeholder="Mã code" class="form-control" v-model="params.code">
+                    </div>
+                    <p class="text-danger" v-if="errorRequest && errorRequest.message.code">
+                        {{errorRequest.message.code[0] }}
+                    </p>
+                    <div class="text-center">
+                        <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2" :disabled="isDisable">Xác thực</button>
+                    </div>
+                    <p class="mt-4 text-sm text-center" @click="reSendEmailVerify" :disabled="isDisable">Gửi lại mã</p>
+                </form>
             </div>
           </div>
         </div>

@@ -1,17 +1,16 @@
 import state from './state'
 
 export default {
-    REGISTER_SUCCESS(state, response) {
+    REGISTER_SUCCESS (state) {
         state.errorRequest = null;
     },
 
-    REGISTER_FAIL(state, response) {
+    REGISTER_FAIL (state, response) {
         state.errorRegister = response;
         state.errorRequest = null;
     },
 
-    REQUEST_FAIL(state, response) {
-        console.log(response);
+    REQUEST_FAIL (state, response) {
         state.errorRequest = response;
         state.errorRegister = null;
     },
@@ -24,4 +23,7 @@ export default {
         console.log(response);
         state.errorLogin = response;
     },
+    VERIFY_SUCCESS (state) {
+        state.errorRequest = null;
+    }
 }

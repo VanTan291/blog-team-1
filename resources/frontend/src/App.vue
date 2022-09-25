@@ -1,12 +1,13 @@
 <template>
     <div id="app">
-      <vue-confirm-dialog></vue-confirm-dialog>
-      <router-view />
+        <notifications group="auth" position="top right" />
+        <vue-confirm-dialog></vue-confirm-dialog>
+        <router-view />
     </div>
-  </template>
+</template>
 
-  <script>
-  export default {
-    name: 'App'
-  }
-  </script>
+<script>
+export default {
+name: 'App'
+}
+</script>

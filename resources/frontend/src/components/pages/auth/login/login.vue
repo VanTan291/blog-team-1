@@ -9,6 +9,9 @@ export default {
     ...mapGetters({
       params: 'Auth/params',
     }),
+  },
+  methods: {
+    ...mapActions
   }
 };
 </script>
