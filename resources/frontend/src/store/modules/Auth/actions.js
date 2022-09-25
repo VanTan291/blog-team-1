@@ -25,8 +25,7 @@ export default {
         return await api.post('login', params)
             .then(response => {
                 if (response && response != undefined) {
-                    console.log(response);
-                    commit('AUTH_TOKEN', response.token);
+                    localStorage.setItem('token', response.token);
                 }
 
                 return response;

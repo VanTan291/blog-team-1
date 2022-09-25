@@ -26,11 +26,13 @@ const routes = [
         path: '/category',
         component: Category,
         name: 'category',
+        meta: { requiresAuth: true }
       },
       {
         path: '/tags',
         component: Tag,
         name: 'tags',
+        meta: { requiresAuth: true }
       },
     ]
   },

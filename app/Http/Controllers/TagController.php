@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TagRequest;
+use App\Http\Requests\Api\TagRequest;
 use App\Http\Resources\TagResource;
 use App\Models\Tag;
 use App\Services\Api\TagService;
@@ -51,7 +51,7 @@ class TagController extends BaseController
                 'code' => Response::HTTP_OK
             ]);
         }
-       
+
         return $this->responseErrors('Category not found');
     }
 

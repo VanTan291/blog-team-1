@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CategoryRequest;
+use App\Http\Requests\Api\CategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
 use App\Services\Api\CategoryService;
@@ -51,7 +51,7 @@ class CategoryController extends BaseController
                 'code' => Response::HTTP_OK
             ]);
         }
-       
+
         return $this->responseErrors('Category not found');
     }
 

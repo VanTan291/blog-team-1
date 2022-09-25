@@ -1,9 +1,9 @@
 import axios from 'axios';
 import router from '../router';
-import authState from '../store/modules/Auth/state';
 
 const initialState = {
     isAuthenticated: false,
+    token: '',
 };
 
 const api = axios.create({
@@ -14,7 +14,8 @@ const api = axios.create({
 });
 
 api.interceptors.request.use(function (config) {
-    config.headers.Authorization = authState.token ? `Bearer ${authState.token}` : '';
+    initialState.token = localStorage.getItem('token');
+    config.headers.Authorization = initialState.token ? `Bearer ${initialState.token}` : '';
     return config;
 });
 
@@ -23,7 +24,7 @@ api.interceptors.response.use(function (response) {
 }, function (error) {
     switch (error.response.status) {
         case 401:
-            this.$router.push({ name: 'home' })
+            router.push({ path: '/' })
             break;
     }
     return Promise.reject(error);
