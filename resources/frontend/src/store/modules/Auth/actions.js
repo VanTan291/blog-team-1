@@ -20,4 +20,13 @@ export default {
                 commit('REQUEST_FAIL', error.response.data);
             })
     },
+
+    async login({ commit }, params) {
+        return await api.post('register', params)
+            .then(response => {
+                if (response && response != undefined) {
+                    commit('LOGIN_SUCCESS', response.data);
+                }
+            })
+    }
 };

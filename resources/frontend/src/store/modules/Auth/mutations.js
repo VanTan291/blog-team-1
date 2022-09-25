@@ -15,4 +15,13 @@ export default {
         state.errorRequest = response;
         state.errorRegister = null;
     },
+
+    LOGIN_SUCCESS(state, response) {
+        state.errorRequest = null;
+    },
+
+    LOGIN_FAIL(state, response) {
+        console.log(response);
+        state.errorLogin = response;
+    },
 }
