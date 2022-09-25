@@ -5,6 +5,7 @@ import Login from '../components/pages/auth/login/login.vue';
 import Register from '../components/pages/auth/register/register.vue';
 import Verify from '../components/pages/auth/verify/index.vue';
 import Category from '../components/pages/Category/index.vue';
+import Tag from '../components/pages/Tag/index.vue';
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
         path: '/category',
         component: Category,
         name: 'category',
+      },
+      {
+        path: '/tags',
+        component: Tag,
+        name: 'tags',
       },
     ]
   },
