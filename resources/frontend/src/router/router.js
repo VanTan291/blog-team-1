@@ -4,6 +4,7 @@ import Profile from '../components/pages/profile';
 import Login from '../components/pages/auth/login/login.vue';
 import Register from '../components/pages/auth/register/register.vue';
 import Verify from '../components/pages/auth/verify/index.vue';
+import Category from '../components/pages/Category/index.vue';
 
 const routes = [
   {
@@ -20,7 +21,11 @@ const routes = [
         component: Profile,
         name: 'profile',
       },
-
+      {
+        path: '/category',
+        component: Category,
+        name: 'category',
+      },
     ]
   },
   {
