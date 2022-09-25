@@ -29,6 +29,7 @@
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets/css/material-kit.css?v=3.0.4') }}" rel="stylesheet" />
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+
     @stack('styles')
 </head>
 
@@ -92,6 +93,20 @@
             console.error(countUp2.error);
             };
         }
+    </script>
+    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+    <script>
+      window.OneSignal = window.OneSignal || [];
+      OneSignal.push(function() {
+        OneSignal.init({
+          appId: "99b30a47-c748-4820-a89d-6841f8436da8",
+          safari_web_id: "web.onesignal.auto.47d572d6-ef9d-4d9d-8962-815db43f4beb",
+          notifyButton: {
+            enable: true,
+          },
+          subdomainName: "18-142-159",
+        });
+      });
     </script>
     @stack('scripts')
 </body>

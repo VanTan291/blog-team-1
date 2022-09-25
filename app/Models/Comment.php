@@ -23,7 +23,7 @@ class Comment extends Model
      */
     public function blog()
     {
-        return $this->belongsTo(Blog::class, 'id', 'blog_id');
+        return $this->belongsTo(Blog::class, 'blog_id', 'id');
     }
 
     /**

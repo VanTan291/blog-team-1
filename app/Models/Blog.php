@@ -31,7 +31,7 @@ class Blog extends Model
      */
     public function user()
     {
-        return $this->belongsTo(User::class, 'id', 'user_id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     /**
@@ -41,7 +41,7 @@ class Blog extends Model
      */
     public function series()
     {
-        return $this->belongsTo(BlogSeries::class, 'id', 'series_id');
+        return $this->belongsTo(BlogSeries::class, 'series_id', 'id');
     }
 
     /**
@@ -81,7 +81,7 @@ class Blog extends Model
      */
     public function category()
     {
-        return $this->belongsTo(Category::class, 'id', 'categories_id');
+        return $this->belongsTo(Category::class, 'categories_id', 'id');
     }
 
     /**
