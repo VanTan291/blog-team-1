@@ -7,7 +7,7 @@
           <div class="container-fluid px-0">
             <a class="navbar-brand font-weight-bolder ms-sm-3" rel="tooltip" title="Designed and Coded by Creative Tim"
               data-placement="bottom" target="_blank">
-              Lâm Văn Tân
+                TST
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse"
               data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false"
@@ -23,7 +23,7 @@
                 <router-link :to="{ name: 'home' }" tag="li" class="nav-item mx-2">
                   <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" v-bind:class="(urlSegment[1] == '') ? 'activeSidebar' : ''">
                     <i class="material-icons opacity-6 me-2 text-md">import_contacts</i>
-                    Blog
+                    Bài viết
                   </a>
                 </router-link>
                 <li class="nav-item dropdown dropdown-hover mx-2">
@@ -53,13 +53,13 @@
                     </div>
                   </div>
                 </li>
-                <router-link :to="{ name: 'profile' }" tag="li" class="nav-item mx-2">
+                <router-link :to="{ name: 'profile' }" tag="li" class="nav-item mx-2" v-if="$store.state.isLogin">
                   <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" v-bind:class="(urlSegment[1] == 'profile') ? 'activeSidebar' : ''">
                     <i class="material-icons opacity-6 me-2 text-md">assignment_ind</i>
                     Profile
                   </a>
                 </router-link>
-                <li tag="li" class="nav-item mx-2" v-if="$store.state.isLogin == true">
+                <li tag="li" class="nav-item mx-2" v-if="$store.state.isLogin">
                   <a class="nav-link ps-2 d-flex cursor-pointer align-items-center"  @click="onLogout">
                     <i class="material-icons opacity-6 me-2 text-md">power_settings_new</i>
                     Đăng xuất
@@ -71,13 +71,6 @@
                     Đăng nhập
                   </a>
                 </router-link>
-                <li class="nav-item ms-lg-auto">
-                  <a class="nav-link nav-link-icon me-2" target="_blank">
-                    <i class="fa fa-github me-1"></i>
-                    <p class="d-inline text-sm z-index-1 font-weight-bold" data-bs-toggle="tooltip"
-                      data-bs-placement="bottom" title="Star us on Github">Github</p>
-                  </a>
-                </li>
               </ul>
             </div>
           </div>

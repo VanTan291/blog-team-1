@@ -21,6 +21,7 @@ const routes = [
         path: '/profile',
         component: Profile,
         name: 'profile',
+        meta: { requiresAuth: true }
       },
       {
         path: '/category',
