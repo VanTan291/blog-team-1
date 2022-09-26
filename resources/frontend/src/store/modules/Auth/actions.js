@@ -25,7 +25,7 @@ export default {
         return await api.post('login', params)
             .then(response => {
                 if (response && response != undefined) {
-                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('_token', response.token);
                 }
 
                 return response;
@@ -44,7 +44,7 @@ export default {
         return await api.post('verify-email', formData)
             .then(response => {
                 if (response && response != undefined) {
-                    localStorage.setItem('token', response.token);
+                    localStorage.setItem('_token', response.token);
                 }
 
                 return response;
@@ -70,12 +70,12 @@ export default {
                 commit('REQUEST_FAIL', error.response.data);
             })
     },
+
     async logout({ commit }) {
-        return await api.post('logout')
+        return await api.get('logout')
             .then(response => {
                 if (response && response != undefined) {
-                    console.log(response);
-                    commit('AUTH_TOKEN', '');
+                    localStorage.removeItem('_token');
                 }
 
                 return response;

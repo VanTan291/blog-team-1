@@ -5,7 +5,7 @@ import routes from './router.js';
 Vue.use(VueRouter);
 
 function loggedIn() {
-    return localStorage.getItem('token');
+    return localStorage.getItem('_token');
 }
 
 const router = new VueRouter({

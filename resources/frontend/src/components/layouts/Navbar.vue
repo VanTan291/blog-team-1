@@ -59,14 +59,16 @@
                     Profile
                   </a>
                 </router-link>
-                <li v-if="checkAuth" @click="logout" tag="li" class="nav-item mx-2">
-                  <a class="nav-link ps-2 d-flex cursor-pointer align-items-center">
-                    Logout
+                <li tag="li" class="nav-item mx-2" v-if="$store.state.isLogin == true">
+                  <a class="nav-link ps-2 d-flex cursor-pointer align-items-center"  @click="onLogout">
+                    <i class="material-icons opacity-6 me-2 text-md">power_settings_new</i>
+                    Đăng xuất
                   </a>
                 </li>
-                <router-link :to="{ name: 'login' }" tag="li" class="nav-item mx-2">
+                <router-link :to="{ name: 'login' }" tag="li" class="nav-item mx-2" v-else>
                   <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" v-bind:class="(urlSegment[1] == 'login') ? 'activeSidebar' : ''">
-                    Login
+                    <i class="material-icons opacity-6 me-2 text-md">fingerprint</i>
+                    Đăng nhập
                   </a>
                 </router-link>
                 <li class="nav-item ms-lg-auto">
@@ -86,9 +88,12 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
+import {utils} from '../../helper/function'
+
 export default {
   name: 'Navbar',
+  mixins: [utils],
   data() {
     return {
       urlSegment: '',
@@ -96,11 +101,6 @@ export default {
   },
   mounted() {
     this.path();
-  },
-  computed: {
-    ...mapGetters({
-        checkAuth: 'Auth/token'
-    })
   },
    methods: {
     ...mapActions({
@@ -110,11 +110,15 @@ export default {
       this.urlSegment = (new URL(window.location.href)).pathname.split('/');
       return this.urlSegment;
     },
-    async logout() {
+    async onLogout() {
         await this.logoutAuth().then(result => {
             if (result.code = 200) {
-                this.$router.push({name: 'login'});
+                this.toastSuccess(result.message);
+                window.location.reload();
             }
+        })
+        .catch(error => {
+            console.log(error);
         })
     }
   },
