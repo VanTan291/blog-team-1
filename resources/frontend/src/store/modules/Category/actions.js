@@ -10,7 +10,7 @@ export default {
 
     async storeCategory({commit}, parameter) {
         let formData = new FormData();
-        formData.append('status', parameter.status ? 1 : 0); 
+        formData.append('status', parameter.status ? 1 : 0);
         formData.append('name', parameter.name);
 
         return await api.post('/categories', formData).then((response) => {
@@ -41,7 +41,7 @@ export default {
     async updateCategory({commit}, parameter) {
         let formData = new FormData();
         formData.append('id', parameter.id);
-        formData.append('status', parameter.status ? 1 : 0); 
+        formData.append('status', parameter.status ? 1 : 0);
         formData.append('name', parameter.name);
 
         return await api.put('/categories/' + parameter.id, parameter).then((response) => {

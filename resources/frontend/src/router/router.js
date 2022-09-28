@@ -4,8 +4,10 @@ import Profile from '../components/pages/profile';
 import Login from '../components/pages/auth/login/login.vue';
 import Register from '../components/pages/auth/register/register.vue';
 import Verify from '../components/pages/auth/verify/index.vue';
-import Category from '../components/pages/Category/index.vue';
-import Tag from '../components/pages/Tag/index.vue';
+import Category from '../components/pages/bloggers/category';
+import Tag from '../components/pages/bloggers/tag';
+import Blogger from '../components/pages/bloggers/layouts/App.vue';
+import Dashboard from '../components/pages/bloggers/dashboard';
 
 const routes = [
   {
@@ -21,18 +23,6 @@ const routes = [
         path: '/profile',
         component: Profile,
         name: 'profile',
-        meta: { requiresAuth: true }
-      },
-      {
-        path: '/category',
-        component: Category,
-        name: 'category',
-        meta: { requiresAuth: true }
-      },
-      {
-        path: '/tags',
-        component: Tag,
-        name: 'tags',
         meta: { requiresAuth: true }
       },
     ]
@@ -51,6 +41,28 @@ const routes = [
     path: '/verify',
     component: Verify,
     name: 'verify',
+  },
+  {
+    path: '/blogger',
+    component: Blogger,
+    meta: { requiresAuth: true },
+    children: [
+      {
+        path: '',
+        component: Dashboard,
+        name: 'dashboard',
+      },
+      {
+        path: '/blogger/categories',
+        component: Category,
+        name: 'categories',
+      },
+      {
+        path: '/blogger/tags',
+        component: Tag,
+        name: 'tags',
+      },
+    ]
   },
 ];
 
