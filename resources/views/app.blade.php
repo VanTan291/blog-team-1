@@ -33,7 +33,7 @@
     <!-- Nucleo Icons -->
     <link href="{{ asset('blogger/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('blogger/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <link id="pagestyle" href="{{ asset('blogger/assets/css/material-dashboard.css?v=3.0.4') }}" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('blogger/assets/css/material-dashboard.css') }}" rel="stylesheet" />
 
     @stack('styles')
 </head>
@@ -66,12 +66,11 @@
     <script src="{{ asset('assets/js/plugins/choices.min.js') }}"></script>
 
     <!--  Plugin for Parallax, full documentation here: https://github.com/wagerfield/parallax  -->
-    <script src="./assets/js/plugins/parallax.min.js"></script>
+    <script src="{{ asset('assets/js/plugins/parallax.min.js') }}"></script>
     <!-- Control Center for Material UI Kit: parallax effects, scripts for the example pages etc -->
     <!--  Google Maps Plugin    -->
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDTTfWur0PDbZWPr7Pmq8K3jiDp0_xUziI"></script>
-    <script src="./assets/js/material-kit.min.js?v=3.0.4" type="text/javascript"></script>
+    <script src="{{ asset('assets/js/material-kit.min.js?v=3.0.4') }}" type="text/javascript"></script>
 
     <script type="text/javascript">
         if (document.getElementById('state1')) {

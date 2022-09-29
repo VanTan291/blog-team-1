@@ -43,12 +43,12 @@ const routes = [
     name: 'verify',
   },
   {
-    path: '/blogger',
+    path: '',
     component: Blogger,
     meta: { requiresAuth: true },
     children: [
       {
-        path: '',
+        path: '/blogger/dashboard',
         component: Dashboard,
         name: 'dashboard',
       },
