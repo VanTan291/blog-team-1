@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Api\User\AuthController;
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
