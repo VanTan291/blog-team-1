@@ -55,12 +55,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link text-white">
+                    <router-link :to="{ name: 'profile' }" tag="a" class="nav-link text-white">
                         <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                             <i class="material-icons opacity-10">person</i>
                         </div>
                         <span class="nav-link-text ms-1">Profile</span>
-                    </a>
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -69,6 +69,11 @@
 
 <script>
 export default {
-name: 'Sidebar'
+    name: 'Sidebar'
 }
 </script>
+<style scoped>
+.bg-white {
+    background-color: #344767 !important;
+}
+</style>

@@ -17,3 +17,4 @@ const mix = require('laravel-mix');
     .postCss('resources/frontend/src/assets/css/style.css', 'public/css/frontend/')
 
 mix.copyDirectory('resources/frontend/src/assets/', 'public/assets/');
+mix.copyDirectory('resources/frontend/src/assets/blogger/assets', 'public/blogger/assets/');
