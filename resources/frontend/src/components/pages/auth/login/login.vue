@@ -10,6 +10,7 @@ export default {
     return {
         loader: false,
         isDisable: false,
+        unverifiedEmail: false,
     };
   },
   mixins: [utils],
@@ -39,6 +40,7 @@ export default {
             this.isDisable = false;
         })
         .catch(error => {
+            this.unverifiedEmail = true;
             this.loader = false;
             this.isDisable = false;
             console.log(error.data);
