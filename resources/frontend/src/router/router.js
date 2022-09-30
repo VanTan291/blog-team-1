@@ -6,6 +6,7 @@ import Register from '../components/pages/auth/register/register.vue';
 import Verify from '../components/pages/auth/verify/index.vue';
 import Category from '../components/pages/Category/index.vue';
 import Tag from '../components/pages/Tag/index.vue';
+import SetupProfile from '../components/pages/profile/setup/setup-profile.vue'
 
 const routes = [
   {
@@ -21,7 +22,13 @@ const routes = [
         path: '/profile',
         component: Profile,
         name: 'profile',
-        meta: { requiresAuth: true }
+        meta: { requiresAuth: true },
+      },
+      {
+        path: '/profile/set-up',
+        component: SetupProfile,
+        name: 'setupProfile',
+        meta: { requiresAuth: true },
       },
       {
         path: '/category',
