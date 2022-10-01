@@ -32,6 +32,11 @@
                 <p class="text-danger" v-if="requestLogin">
                     {{ requestLogin.message }}
                 </p>
+                <router-link :to="{ name: 'verify' }" v-if="unverifiedEmail">
+                    <p class="mt-4 text-sm text-center">
+                      Verify email tại đây
+                    </p>
+                </router-link>
                 <div class="input-group input-group-outline my-3">
                   <input  placeholder="Email" type="email" v-model="params.email" class="form-control">
                 </div>
