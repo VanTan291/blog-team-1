@@ -1,0 +1,39 @@
+<div class="container-fluid py-4">
+    <div class="card p-3 bg-gradient-light">
+        <h1>Tạo bài viết mới</h1>
+        <form class="text-start">
+            <div class="row">
+                <div class="col-4">
+                    <label class="typo__label" for="ajax">Loạt bài viết</label>
+                    <multiselect v-model="value" label="name" track-by="code" :options="options" :multiple="true"
+                        :taggable="true" @tag="addSeries">
+                    </multiselect>
+                </div>
+                <div class="col-4">
+                    <label class="typo__label" for="ajax">Danh mục</label>
+                    <multiselect v-model="value" label="name" track-by="code" :options="options" :multiple="true"
+                        :taggable="true" @tag="addCategory">
+                    </multiselect>
+                </div>
+                <div class="col-4">
+                    <label class="typo__label" for="ajax">Nhãn</label>
+                    <multiselect v-model="value" label="name" track-by="code" :options="options" :multiple="true"
+                        :taggable="true" @tag="addTag">
+                    </multiselect>
+                </div>
+            </div>
+            <div class="input-group input-group-outline my-3">
+                <textarea type="text" placeholder="Tiêu đề" class="form-control" cols="3"></textarea>
+            </div>
+
+            <ckeditor :editor="editor" v-model="editorData" :config="editorConfig"></ckeditor>
+            <div class="input-group input-group-outline my-3">
+                <input type="file" placeholder="thumbnail" class="form-control">
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>

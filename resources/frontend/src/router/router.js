@@ -8,6 +8,8 @@ import Category from '../components/pages/bloggers/category';
 import Tag from '../components/pages/bloggers/tag';
 import Blogger from '../components/pages/bloggers/layouts/App.vue';
 import Dashboard from '../components/pages/bloggers/dashboard';
+import Blog from '../components/pages/bloggers/blogs';
+import CreateBlog from '../components/pages/bloggers/blogs/create.vue';
 
 const routes = [
   {
@@ -61,6 +63,16 @@ const routes = [
         path: '/blogger/tags',
         component: Tag,
         name: 'tags',
+      },
+      {
+        path: '/blogger/blog',
+        component: Blog,
+        name: 'blog',
+      },
+      {
+        path: '/blogger/create-blog',
+        component: CreateBlog,
+        name: 'create_blog',
       },
     ]
   },
