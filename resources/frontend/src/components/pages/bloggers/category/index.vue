@@ -33,7 +33,7 @@ export default {
         async updateOrCreate() {
             if (this.category.id) {
                 await this.updateCategory(this.category).then(result => {
-                    if (result.data.code == 200) {
+                    if (result.code == 200) {
                         this.getListCategories(this.page);
                         this.category = {
                             name: '',
@@ -50,7 +50,7 @@ export default {
                 });
             } else {
                 await this.storeCategory(this.category).then(result => {
-                    if (result.data.code == 200) {
+                    if (result.code == 200) {
                         this.getListCategories(this.page);
                         this.category = {
                             name: '',
@@ -69,8 +69,8 @@ export default {
 
         show(categoryId) {
             this.showCategory(categoryId).then(result => {
-                if (result.data.code == 200) {
-                    this.category = result.data.data;
+                if (result.code == 200) {
+                    this.category = result.data;
                 } else {
                     console.log(result);
                 }
@@ -89,7 +89,7 @@ export default {
                     callback: confirm => {
                         if (confirm) {
                             this.deleteCategory(category).then(result => {
-                                if (result.data.code == 200) {
+                                if (result.code == 200) {
                                     this.getListCategories(this.page);
                                     this.toastSuccess('Xóa thành công');
                                 } else {
