@@ -3,8 +3,8 @@ import api from '../../../configs/api';
 export default {
     async getCategories({ commit }, page) {
         const { data } = await api.get('/categories?page=' + page + '&page_size=5');
-        if (data.data.data) {
-            commit('CATEGORIES', data.data);
+        if (data?.data) {
+            commit('CATEGORIES', data);
         }
     },
 

@@ -3,8 +3,8 @@ import api from '../../../configs/api';
 export default {
     async getListTags({ commit }, page) {
         const { data } = await api.get('/tags?page=' + page + '&page_size=5');
-        if (data.data.data) {
-            commit('TAGS', data.data);
+        if (data.data) {
+            commit('TAGS', data);
         }
     },
 

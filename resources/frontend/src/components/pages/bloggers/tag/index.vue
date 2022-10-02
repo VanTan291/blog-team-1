@@ -33,7 +33,7 @@ export default {
         async updateOrCreate() {
             if (this.tag.id) {
                 await this.updateTag(this.tag).then(result => {
-                    if (result.data.code == 200) {
+                    if (result.code == 200) {
                         this.getTags(this.page);
                         this.tag = {
                             name: '',
@@ -50,7 +50,7 @@ export default {
                 });
             } else {
                 await this.storeTag(this.tag).then(result => {
-                    if (result.data.code == 200) {
+                    if (result.code == 200) {
                         this.getTags(this.page);
                         this.tag = {
                             name: '',
@@ -69,8 +69,8 @@ export default {
 
         show(tagId) {
             this.showTag(tagId).then(result => {
-                if (result.data.code == 200) {
-                    this.tag = result.data.data;
+                if (result.code == 200) {
+                    this.tag = result.data;
                 } else {
                     console.log(result);
                 }
@@ -89,7 +89,7 @@ export default {
                     callback: confirm => {
                         if (confirm) {
                             this.deleteTag(tag).then(result => {
-                                if (result.data.code == 200) {
+                                if (result.code == 200) {
                                     this.getTags(this.page);
                                     this.toastSuccess('Xóa thành công');
                                 } else {
