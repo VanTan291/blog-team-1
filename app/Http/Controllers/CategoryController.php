@@ -81,4 +81,17 @@ class CategoryController extends BaseController
 
         return $this->responseErrors($result['message']);
     }
+
+    public function getListCategory() {
+        try {
+            $listCategory = $this->categoryService->getListCategory();
+            return $this->responseSuccess([
+                'data' => CategoryResource::collection($listCategory)
+            ]);
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            return $this->responseErrors(__('messages.get_error'));
+        }
+    }
 }

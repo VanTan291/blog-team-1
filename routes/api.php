@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\User\AuthController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\User\BlogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,5 +29,9 @@ Route::group(['middleware' => ['auth.user']], function () {
     Route::get('me', [AuthController::class, 'me']);
     Route::resource('tags', TagController::class);
     Route::resource('categories', CategoryController::class);
+    Route::get('listCategory', [CategoryController::class, 'getListCategory']);
+    Route::get('listTag', [TagController::class, 'getListTag']);
+    Route::resource('blogs', BlogController::class);
+    Route::get('listSeries', [BlogController::class, 'getListSeries']);
 });
 

@@ -1,6 +1,7 @@
 import state from "./state";
 
 export default {
-    getCategories: state => state.categories,
-    getErrors: state => state.errors,
-}
+    getCategories: (state) => state.categories,
+    getErrors: (state) => state.errors,
+    listCategory: (state) => state.listCategory
+};

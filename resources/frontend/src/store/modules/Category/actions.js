@@ -65,5 +65,16 @@ export default {
             console.log(error);
             return false
         });
+    },
+
+    async getListCategory({commit}) {
+        return await api.get('/listCategory').then((response) => {
+            if (response && response != undefined) {
+                commit("LIST_CATEGORY", response.data);
+            }
+        }).catch((error) => {
+            console.log(error);
+            return false
+        });
     }
 }

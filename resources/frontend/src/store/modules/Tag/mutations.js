@@ -6,5 +6,8 @@ export default {
     },
     ERRORS(states, errors) {
         states.errors = errors;
-    }
+    },
+     LIST_TAG(states, listTag) {
+        states.listTag = listTag;
+    },
 }
