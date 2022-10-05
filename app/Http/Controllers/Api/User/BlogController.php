@@ -9,6 +9,7 @@ use App\Http\Resources\SeriesResource;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Response;
 use App\Http\Requests\Api\User\BlogRequest;
+use App\Http\Resources\BlogResource;
 
 class BlogController extends Controller
 {
@@ -27,9 +28,20 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $user = auth('api')->user();
+
+        $result = $this->blogService->index($user);
+
+        if ($result['status'] == Response::HTTP_OK) {
+            return response()->apiSuccess([
+                'data' => BlogResource::apiPaginate($result['data'], $request),
+                'code' => Response::HTTP_OK
+            ]);
+        }
+
+        return response()->apiErrors($result['message']);
     }
 
     /**
@@ -107,7 +119,8 @@ class BlogController extends Controller
         //
     }
 
-    public function getListSeries() {
+    public function getListSeries()
+    {
         try {
             $listSeries = $this->blogService->getListSeries();
 
@@ -119,5 +132,20 @@ class BlogController extends Controller
 
             return response()->apiErrors(__('messages.get_error'));
         }
+    }
+
+    public function getListBlogHome(Request $request)
+    {
+        $result = $this->blogService->getListBlogHome($request->all());
+
+        if ($result['status'] == Response::HTTP_OK) {
+            return response()->apiSuccess([
+                'blogTrends' => BlogResource::collection($result['blogTrends'], $request),
+                'blogs' => BlogResource::apiPaginate($result['blogs'], $request),
+                'code' => Response::HTTP_OK
+            ]);
+        }
+
+        return response()->apiErrors($result['message']);
     }
 }

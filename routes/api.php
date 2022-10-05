@@ -33,5 +33,6 @@ Route::group(['middleware' => ['auth.user']], function () {
     Route::get('listTag', [TagController::class, 'getListTag']);
     Route::resource('blogs', BlogController::class);
     Route::get('listSeries', [BlogController::class, 'getListSeries']);
+    Route::get('list-blog-home', [BlogController::class, 'getListBlogHome']);
 });
 

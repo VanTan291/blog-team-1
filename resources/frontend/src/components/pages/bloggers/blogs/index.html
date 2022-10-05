@@ -17,60 +17,58 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Tên nhãn</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Nội dung</th>
+                                        Mô tả</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Trạng thái</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr v-for="item in listBlog" :key="item.id">
                                     <td>
                                         <div class=" px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0">d</h6>
+                                                <h6 class="mb-0">{{ item.title }}</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class=" px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0">d</h6>
+                                                <img :src="item.thumbnail"
+                                                    style="width: 80px; height: 80px" />
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class=" px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0">d</h6>
+                                                <h6 class="mb-0">{{ item.category }}</h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class=" px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0">d</h6>
+                                                <h6 class="mb-0" v-for="tag in item.tags">
+                                                    <p>{{ tag.name }}</p>
+                                                </h6>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class=" px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0">d</h6>
+                                                <p>{{ item.description }}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
                                         <div class=" px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0">d</h6>
+                                                <h6 class="mb-0">{{ item.status }}</h6>
                                             </div>
                                         </div>
-                                    </td>
-
-                                    <td class="text-sm">
-                                        <span class="badge">
-                                            s</span>
                                     </td>
                                     <td class="d-flex justify-content-center">
                                         <button type="button" class="btn btn-facebook my-0 mx-1 p-2 f-item">

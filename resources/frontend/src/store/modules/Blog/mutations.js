@@ -12,4 +12,8 @@ export default {
     ERRORS(state, response) {
         state.errorRequest = response;
     },
+
+    LIST_BLOG(state, response) {
+        state.blogs = response;
+    },
 };

@@ -34,6 +34,25 @@ class BlogService extends BaseService
         $this->model = $model;
     }
 
+    public function index(User $user)
+    {
+        try {
+            $blogs = $this->model->where('user_id', $user->id)->latest('id');
+
+            if ($blogs) {
+                return [
+                    'status' => Response::HTTP_OK,
+                    'data' => $blogs,
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'status' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
     public function getListSeries()
     {
         return BlogSeries::all();
@@ -52,7 +71,7 @@ class BlogService extends BaseService
                 ]);
             }
 
-            $url = Storage::disk()->put('blog', $params['thumbnail']);
+            $url = Storage::disk()->put('public', $params['thumbnail']);
 
             $blog = $this->model->create([
                 'user_id' => $user->id ?? '',
@@ -60,6 +79,7 @@ class BlogService extends BaseService
                 'series_id' => $blogSeries->id ?? '',
                 'title' => $params['title'] ?? '',
                 'content' => $params['content'] ?? '',
+                'description' => $params['description'] ?? '',
                 'thumbnail' => $url ?? '',
                 'is_published' => self::ACTIVE
             ]);
@@ -89,4 +109,31 @@ class BlogService extends BaseService
             ];
         }
     }
+
+     public function getListBlogHome($params)
+    {
+        try {
+            $blogTrends = $this->model
+                ->where('views', '>', 10)
+                ->skip(0)
+                ->take(4)
+                ->get();
+
+            $blogs = $this->model->latest('id');
+
+            if ($blogs) {
+                return [
+                    'status' => Response::HTTP_OK,
+                    'blogTrends' => $blogTrends,
+                    'blogs' => $blogs
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'status' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
 }

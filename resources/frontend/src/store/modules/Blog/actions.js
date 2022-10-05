@@ -15,17 +15,33 @@ export default {
             });
     },
 
+    async getListBlog({ commit }, params) {
+        return await api
+            .get(`blogs?page=${params.page}`)
+            .then((response) => {
+                if (response && response != undefined) {
+                    commit("LIST_BLOG", response.data.data);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                return false;
+            });
+
+    },
+
     async store({ commit }, params) {
         let formData = new FormData();
-        formData.append('series', params.series ?? '');
-        formData.append('category', params.category ? params.category.id : '');
-        formData.append('tags', JSON.stringify(params.tag));
-        formData.append('title', params.title ?? '');
-        formData.append('content', params.content ?? '');
-        formData.append('thumbnail', params.thumbnail ?? '');
+        formData.append("series", params.series ?? "");
+        formData.append("category", params.category ? params.category.id : "");
+        formData.append("tags", JSON.stringify(params.tag));
+        formData.append("title", params.title ?? "");
+        formData.append("content", params.content ?? "");
+        formData.append("thumbnail", params.thumbnail ?? "");
+        formData.append("description", params.description ?? "");
 
         return await api
-            .post('blogs', formData)
+            .post("blogs", formData)
             .then((response) => {
                 if (response && response != undefined) {
                     commit("ERRORS", null);
@@ -34,7 +50,7 @@ export default {
                 return response;
             })
             .catch((error) => {
-                commit('ERRORS', error.response.data);
+                commit("ERRORS", error.response.data);
             });
     },
 };
