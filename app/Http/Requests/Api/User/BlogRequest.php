@@ -37,6 +37,10 @@ class BlogRequest extends BaseRequest
                 'required',
                 'string',
             ],
+            'description' => [
+                'required',
+                'string',
+            ],
             'content' => [
                 'required',
             ],

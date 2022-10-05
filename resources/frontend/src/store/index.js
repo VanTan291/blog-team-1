@@ -4,6 +4,7 @@ import Auth from './modules/Auth/Auth';
 import Category from './modules/Category/Category';
 import Tag from './modules/Tag/Tag';
 import Blog from './modules/Blog/Blog'
+import Home from './modules/Home/Home'
 
 Vue.use(Vuex);
 export default new Vuex.Store({
@@ -15,5 +16,6 @@ export default new Vuex.Store({
         Category,
         Tag,
         Blog,
+        Home,
     },
 });
