@@ -33,7 +33,7 @@
     <!-- Nucleo Icons -->
     <link href="{{ asset('blogger/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('blogger/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
-    <link id="pagestyle" href="{{ asset('blogger/assets/css/material-dashboard.css') }}" rel="stylesheet" />
+    <link id="pagestyle" href="{{ asset('blogger/assets/css/material-dashboard.css?v=3.0.4') }}" rel="stylesheet" />
 
     @stack('styles')
 </head>

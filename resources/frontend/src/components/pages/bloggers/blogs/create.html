@@ -1,0 +1,59 @@
+<div class="container-fluid py-4">
+    <div class="card p-3 bg-gradient-light">
+        <h1>Tạo bài viết mới</h1>
+        <div class="loader" v-if="loader"></div>
+        <form class="text-start" @submit.prevent="create">
+            <div class="row">
+                <div class="col-4">
+                    <label class="typo__label" for="ajax">Loạt bài viết</label>
+                    <multiselect v-model="listSeriesOption" label="title" track-by="title" :options="series" :multiple="false"
+                        :taggable="true" @tag="addSeries" selectLabel="chọn"  deselectLabel="xoá" tagPlaceholder="thêm mới" placeholder="chuỗi bài viết">
+                    </multiselect>
+                    <p class="text-danger" v-if="errorRequest && errorRequest.message.series">
+                        {{errorRequest.message.series[0] }}
+                    </p>
+                </div>
+                <div class="col-4">
+                    <label class="typo__label" for="ajax">Danh mục</label>
+                    <multiselect v-model="params.category" track-by="name" label="name"
+                        :options="categories" :searchable="true" :allow-empty="false" placeholder="chọn danh mục">
+                    </multiselect>
+                    <p class="text-danger" v-if="errorRequest && errorRequest.message.category">
+                        {{errorRequest.message.category[0] }}
+                    </p>
+                </div>
+                <div class="col-4">
+                    <label class="typo__label" for="ajax">Nhãn</label>
+                    <multiselect v-model="listTagOption" label="name" track-by="name" :options="tags" :multiple="true"
+                        :taggable="true" @tag="addTag" selectLabel="chọn" deselectLabel="xoá" tagPlaceholder="thêm mới" placeholder="chọn nhãn">
+                    </multiselect>
+                    <p class="text-danger" v-if="errorRequest && errorRequest.message.tags">
+                        {{errorRequest.message.tags[0] }}
+                    </p>
+                </div>
+            </div>
+            <div>
+                <div class="input-group input-group-outline my-3">
+                    <textarea type="text" placeholder="Tiêu đề" v-model="params.title" class="form-control" cols="3"></textarea>
+                </div>
+                <p class="text-danger" v-if="errorRequest && errorRequest.message.title">
+                    {{errorRequest.message.title[0] }}
+                </p>
+            </div>
+            <ckeditor :editor="editor" v-model="params.content" :config="editorConfig"></ckeditor>
+            <p class="text-danger" v-if="errorRequest && errorRequest.message.content">
+                {{errorRequest.message.content[0] }}
+            </p>
+            <div class="input-group input-group-outline my-3">
+                <input type="file" placeholder="thumbnail" @change="uploadFile" class="form-control" ref="thumbnail">
+            </div>
+            <p class="text-danger" v-if="errorRequest && errorRequest.message.thumbnail">
+                {{errorRequest.message.thumbnail[0] }}
+            </p>
+
+            <div class="text-center">
+                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Lưu</button>
+            </div>
+        </form>
+    </div>
+</div>

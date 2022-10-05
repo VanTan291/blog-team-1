@@ -81,4 +81,17 @@ class TagController extends BaseController
 
         return $this->responseErrors($result['message']);
     }
+
+    public function getListTag() {
+        try {
+            $listTag = $this->tagService->getListTag();
+            return $this->responseSuccess([
+                'data' => TagResource::collection($listTag)
+            ]);
+        } catch (\Exception $e) {
+            Log::error($e);
+
+            return $this->responseErrors(__('messages.get_error'));
+        }
+    }
 }

@@ -88,4 +88,9 @@ class CategoryService extends BaseService
             ];
         }
     }
+
+    public function getListCategory()
+    {
+        return $this->model->get();
+    }
 }

@@ -89,4 +89,9 @@ class TagService extends BaseService
             ];
         }
     }
+
+    public function getListTag()
+    {
+        return $this->model->get();
+    }
 }

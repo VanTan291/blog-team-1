@@ -6,5 +6,8 @@ export default {
     },
     ERRORS(states, errors) {
         states.errors = errors;
-    }
-}
+    },
+    LIST_CATEGORY(states, listCategory) {
+        states.listCategory = listCategory;
+    },
+};
