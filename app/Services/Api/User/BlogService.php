@@ -17,6 +17,7 @@ use App\Models\BlogSeries;
 use App\Models\Tag;
 use App\Models\Taggable;
 use Illuminate\Support\Facades\Storage;
+use App\Enums\BlogStatus;
 
 /**
  * Class BlogService
@@ -114,12 +115,19 @@ class BlogService extends BaseService
     {
         try {
             $blogTrends = $this->model
-                ->where('views', '>', 10)
+                ->where([
+                    ['views', '>', 10],
+                    ['is_published', BlogStatus::ACTIVE]
+                ])
                 ->skip(0)
                 ->take(4)
                 ->get();
 
-            $blogs = $this->model->latest('id');
+            $blogs = $this->model
+                ->where([
+                    ['is_published', BlogStatus::ACTIVE]
+                ])
+                ->latest('id');
 
             if ($blogs) {
                 return [
