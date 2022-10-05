@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Response;
 use App\Http\Requests\Api\User\BlogRequest;
 use App\Http\Resources\BlogResource;
+use App\Models\Blog;
 
 class BlogController extends Controller
 {
@@ -142,6 +143,21 @@ class BlogController extends Controller
             return response()->apiSuccess([
                 'blogTrends' => BlogResource::collection($result['blogTrends'], $request),
                 'blogs' => BlogResource::apiPaginate($result['blogs'], $request),
+                'code' => Response::HTTP_OK
+            ]);
+        }
+
+        return response()->apiErrors($result['message']);
+    }
+
+    public function getDetailBlog(Request $request, Blog $blog)
+    {
+        $getListOfRelatedBlogs = $this->blogService->getListOfRelatedBlogs($blog, $request->all());
+
+        if ($blog) {
+            return response()->apiSuccess([
+                'data' => new BlogResource($blog, $request),
+                'listOfRelatedBlogs' => BlogResource::collection($getListOfRelatedBlogs['data'], $request),
                 'code' => Response::HTTP_OK
             ]);
         }

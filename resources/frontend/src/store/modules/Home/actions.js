@@ -13,6 +13,19 @@ export default {
                 console.log(error);
                 return false;
             });
+    },
 
+    async getDetailBlog({ commit }, id) {
+        return await api
+            .get(`detail-blog/${id}`)
+            .then((response) => {
+                if (response && response != undefined) {
+                    commit("DETAIL_BLOG", response);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                return false;
+            });
     },
 };

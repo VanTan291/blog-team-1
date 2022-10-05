@@ -5,4 +5,8 @@ export default {
         state.listBlogTrend = response.blogTrends;
         state.listBlog = response.blogs.data;
     },
+    DETAIL_BLOG(state, response) {
+        state.detailBlog = response.data;
+        state.listOfRelatedBlogs = response.listOfRelatedBlogs;
+    },
 };
