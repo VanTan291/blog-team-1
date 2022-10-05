@@ -144,4 +144,28 @@ class BlogService extends BaseService
         }
     }
 
+    public function getListOfRelatedBlogs($blog, $params)
+    {
+        try {
+            $getListOfRelatedBlogs = $this->model->where([
+                ['id', '<>', $blog->id],
+                ['series_id', '=', $blog->series_id],
+                ['is_published', BlogStatus::ACTIVE]
+            ])
+            ->get();
+
+            if ($getListOfRelatedBlogs) {
+                return [
+                    'status' => Response::HTTP_OK,
+                    'data' => $getListOfRelatedBlogs,
+                ];
+            }
+
+        } catch (Exception $e) {
+            return [
+                'status' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
 }

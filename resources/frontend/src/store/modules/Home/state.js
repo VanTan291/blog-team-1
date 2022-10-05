@@ -1,4 +1,6 @@
 export default {
     listBlogTrend: {},
-    listBlog: {}
+    listBlog: {},
+    detailBlog: {},
+    listOfRelatedBlogs: {},
 };

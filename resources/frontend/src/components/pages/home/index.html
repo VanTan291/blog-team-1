@@ -7,31 +7,34 @@
                     <p class="opacity-8 mb-0">Trao dồi kiến thức đi bạn ơi.</p>
                 </div>
             </div>
-            <div class="row" >
+            <div class="row">
                 <div class="col-lg-6 col-12 mb-4 mt-4" v-for="item in listBlogTrend" :key="item.id">
+                    <router-link :to="{ name: 'detail', params: { id: item.id } }">
                     <div class="card card-profile mt-4">
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12 mt-n5">
                                 <a href="javascript:;">
                                     <div class="p-3 pe-md-0">
                                         <img class="w-100 border-radius-md shadow-lg"
-                                            :src="item.thumbnail" alt="image" style="width:100px; height: 100px">
+                                            :src="item.thumbnail" alt="image" style="width:100px; height: 150px">
                                     </div>
                                 </a>
                             </div>
                             <div class="col-lg-8 col-md-6 col-12 my-auto">
                                 <div class="card-body ps-lg-0">
                                     <h5 class="mb-0">{{ item.title }}</h5>
-                                    <h6 class="text-info">UI Designer</h6>
+                                    <h6 class="text-info">{{ item.create_date }}</h6>
                                     <p class="mb-0">{{ item.description }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </router-link>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-4 col-12 mb-4 mt-4" v-for="item in listBlog" :key="item.id">
+                    <router-link :to="{ name: 'detail', params: { id: item.id } }">
                     <div class="card card-profile mt-4">
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-12">
@@ -45,12 +48,13 @@
                             <div class="col-lg-8 col-md-6 col-12 my-auto">
                                 <div class="card-body ps-lg-0">
                                     <h5 class="mb-0">{{ item.title }}</h5>
-                                    <h6 class="text-info">UI Designer</h6>
+                                    <h6 class="text-info">{{ item.create_date }}</h6>
                                     <p class="mb-0">{{ item.description }}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </router-link>
                 </div>
             </div>
 
