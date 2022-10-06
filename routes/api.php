@@ -22,7 +22,8 @@ Route::post('login', [AuthController::class, 'login']);
 Route::POST('register', [AuthController::class, 'register']);
 Route::POST('verify-email', [AuthController::class, 'verifyEmailCode']);
 Route::POST('re-send-verify-email', [AuthController::class, 'reSendVerifyEmail']);
-
+Route::get('list-blog-home', [BlogController::class, 'getListBlogHome']);
+Route::get('detail-blog/{blog}', [BlogController::class, 'getDetailBlog']);
 
 Route::group(['middleware' => ['auth.user']], function () {
     Route::get('logout', [AuthController::class, 'logout']);
@@ -33,7 +34,5 @@ Route::group(['middleware' => ['auth.user']], function () {
     Route::get('listTag', [TagController::class, 'getListTag']);
     Route::resource('blogs', BlogController::class);
     Route::get('listSeries', [BlogController::class, 'getListSeries']);
-    Route::get('list-blog-home', [BlogController::class, 'getListBlogHome']);
-    Route::get('detail-blog/{blog}', [BlogController::class, 'getDetailBlog']);
 });
 

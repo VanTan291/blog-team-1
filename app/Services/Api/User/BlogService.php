@@ -65,7 +65,7 @@ class BlogService extends BaseService
         try {
             if (BlogSeries::where('title', $params['series'])->exists()) {
                 $blogSeries = BlogSeries::where('title', $params['series'])->first();
-            } else {
+            } else if (isset($params['series']) && $params['series'] != '') {
                 $blogSeries = BlogSeries::create([
                     'user_id' => $user->id,
                     'title' => $params['series']
@@ -75,13 +75,13 @@ class BlogService extends BaseService
             $url = Storage::disk()->put('public', $params['thumbnail']);
 
             $blog = $this->model->create([
-                'user_id' => $user->id ?? '',
-                'categories_id' => $params['category'] ?? '',
-                'series_id' => $blogSeries->id ?? '',
-                'title' => $params['title'] ?? '',
-                'content' => $params['content'] ?? '',
-                'description' => $params['description'] ?? '',
-                'thumbnail' => $url ?? '',
+                'user_id' => $user->id ?? null,
+                'categories_id' => $params['category'] ?? null,
+                'series_id' => $blogSeries->id ?? null,
+                'title' => $params['title'] ?? null,
+                'content' => $params['content'] ?? null,
+                'description' => $params['description'] ?? null,
+                'thumbnail' => $url ?? null,
                 'is_published' => self::ACTIVE
             ]);
 

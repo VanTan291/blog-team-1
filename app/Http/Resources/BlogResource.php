@@ -14,7 +14,7 @@ class BlogResource extends BaseResource
             'id' => $this->id,
             'title' => $this->title,
             'category' => $this->category->name,
-            'blog_series' => $this->series->title,
+            'blog_series' => $this->when($this->series, $this->series->title ?? ''),
             'content' => $this->content,
             'thumbnail' => $this->thumbnail_url,
             'description' => $this->description,

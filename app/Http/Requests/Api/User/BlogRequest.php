@@ -15,10 +15,10 @@ class BlogRequest extends BaseRequest
     public function rules()
     {
         return [
-            'series' => [
-                'required',
-                'string',
-            ],
+            // 'series' => [
+            //     'required',
+            //     'string',
+            // ],
             'category' => [
                 'required',
                 'string',
