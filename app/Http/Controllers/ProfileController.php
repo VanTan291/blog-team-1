@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Api\ProfileRequest;
+use App\Models\User;
 use App\Services\Api\ProfileService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProfileController extends BaseController
 {
@@ -14,9 +17,19 @@ class ProfileController extends BaseController
         $this->profileService = $profileService;
     }
 
-    public function setupProfile(Request $request)
+    public function setupProfile(ProfileRequest $request)
     {
         $result = $this->profileService->updateOrCreate($request->all());
-        // dd($result);
+
+        if ($result['code'] != Response::HTTP_OK) {
+            return response()->apiErrors($result);
+        }
+
+        return response()->apiSuccess($result);
+        // if ($result['code'] == Response::HTTP_OK) {
+        //     return $this->responseSuccess($result);
+        // }
+
+        // return $this->responseErrors($result['message']);
     }
 }

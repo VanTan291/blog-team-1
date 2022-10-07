@@ -126,7 +126,7 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $login =  $this->authService->login($request->all());
+        $login = $this->authService->login($request->all());
 
         if ($login['code'] != Response::HTTP_OK) {
             return response()->apiErrors($login);

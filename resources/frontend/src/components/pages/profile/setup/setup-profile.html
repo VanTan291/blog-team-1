@@ -11,83 +11,95 @@
             </div>
             <div class="card-body">
                 <!-- <div class="loader"></div> -->
-                <form class="text-start" @submit.prevent="register">
+                <form class="text-start" @submit.prevent="setup">
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Tên
                         </h6>
-                        <input type="text" name="name" placeholder="Tên" class="form-control">
+                        <input type="text" name="name" v-model="params.name" placeholder="Tên" class="form-control">
                     </div>
-                    <!-- <p class="text-danger" v-if="errorRequest && errorRequest.message.name">
-                        {{errorRequest.message.name[0] }}
-                    </p> -->
+                    <p class="text-danger" v-if="requestError && requestError.message.name">
+                        {{ requestError.message.name[0] }}
+                    </p>
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Số điện thoại
                         </h6>
-                        <input type="text" name="phone" placeholder="Số điện thoại" class="form-control">
+                        <input type="text" name="phone" v-model="params.phone" placeholder="Số điện thoại" class="form-control">
                     </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.phone">
+                        {{ requestError.message.phone[0] }}
+                    </p>
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Email
                         </h6>
-                        <input type="email" name="email" placeholder="Email" class="form-control">
+                        <input type="email" name="email" v-model="params.email" placeholder="Email" class="form-control">
                     </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.email">
+                        {{ requestError.message.email[0] }}
+                    </p>
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Password
                         </h6>
-                        <input type="password" name="password" placeholder="Password" class="form-control">
+                        <input type="password" name="password" v-model="params.password" placeholder="Password" class="form-control">
                     </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.password">
+                        {{ requestError.message.password[0] }}
+                    </p>
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Confirm Password
                         </h6>
-                        <input type="password" name="confirm_password" placeholder="Confirm Password" class="form-control">
+                        <input type="password" name="confirm_password" v-model="params.confirm_password" placeholder="Confirm Password" class="form-control">
                     </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.confirm_password">
+                        {{ requestError.message.confirm_password[0] }}
+                    </p>
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Avatar
                         </h6>
-                        <input type="file" name="avatar" class="form-control">
+                        <!-- <input type="file" name="avatar" class="form-control"> -->
+                        <div class="col-md-6">
+                            <!-- <input type="file" v-on:change="onImageChange" class="form-control"> -->
+                        </div>
+                        <div class="col-md-3" v-if="params.image">
+                            <!-- <img :src="image" class="img-responsive" height="70" width="90"> -->
+                        </div>
                     </div>
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Địa chỉ
                         </h6>
-                        <input type="text" name="address" placeholder="Địa chỉ" class="form-control">
+                        <input type="text" v-model="params.address" name="address" placeholder="Địa chỉ" class="form-control">
                     </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.address">
+                        {{ requestError.message.address[0] }}
+                    </p>
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Giới tính
                         </h6>
-                        <input type="text" name="gender" placeholder="Giới tính" class="form-control">
+                        <input type="text" v-model="params.gender" name="gender" placeholder="Giới tính" class="form-control">
                     </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.gender">
+                        {{ requestError.message.gender[0] }}
+                    </p>
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Ngày sinh
                         </h6>
-                        <input type="text" name="birthday" placeholder="Ngày" class="form-control">
+                        <input type="date" v-model="params.birthday" name="birthday" placeholder="Ngày" class="form-control">
                     </div>
-                    <!-- <p class="text-danger" v-if="errorRequest && errorRequest.message.email">
-                        {{errorRequest.message.email[0] }}
-                    </p> -->
-                    <div class="input-group input-group-outline my-3">
-                        <input type="password" placeholder="Mật khẩu" class="form-control">
-                    </div>
-                    <!-- <p class="text-danger" v-if="errorRequest && errorRequest.message.password">
-                        {{errorRequest.message.password[0] }}
-                    </p> -->
-                    <div class="input-group input-group-outline my-3">
-                        <input type="password" placeholder="Nhập lại mật khẩu" class="form-control">
-                    </div>
-                    <!-- <p class="text-danger" v-if="errorRequest && errorRequest.message.password_confirmation">
-                        {{errorRequest.message.password_confirmation[0] }}
-                    </p> -->
+                    <p class="text-danger" v-if="requestError && requestError.message.birthday">
+                        {{ requestError.message.birthday[0] }}
+                    </p>
                     <div class="text-center">
-                    <button type="submit"
-                        class="btn bg-gradient-dark w-100 my-4 mb-2"
-                        >Đăng ký</button>
+                        <button type="submit"
+                            class="btn bg-gradient-dark w-100 my-4 mb-2"
+                            >Đăng ký</button>
                     </div>
                 </form>
             </div>

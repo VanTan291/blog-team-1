@@ -1,4 +1,4 @@
 export default {
     params: {},
-    equestError: null,
+    requestError: null,
 }

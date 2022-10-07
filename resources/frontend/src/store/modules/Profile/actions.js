@@ -1,23 +1,18 @@
 import api from "../../../configs/api";
 
 export default {
-    // async register({ commit }, params) {
-    //     let formData = new FormData();
-    //     formData.append('name', params.name ?? '');
-    //     formData.append('email', params.email ?? '');
-    //     formData.append('password', params.password ?? '');
-    //     formData.append('password_confirmation', params.password_confirmation ?? '');
+    async setupProfile({ commit }, params) {
 
-    //     return await api.post('register', formData)
-    //         .then(response => {
-    //             if (response && response != undefined) {
-    //                 commit('REGISTER_SUCCESS', response.data);
-    //             }
+        return await api.post('setup-profile', params)
+            .then(response => {
+                if (response && response != undefined) {
+                    commit('SETUP_SUCCESS', response.data);
+                }
 
-    //             return response;
-    //         })
-    //         .catch((error) => {
-    //             commit('REQUEST_FAIL', error.response.data);
-    //         })
-    // },
+                return response;
+            })
+            .catch((error) => {
+                commit('SETUP_FAIL', error.response.data);
+            })
+    },
 };
