@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Blog extends Model
 {
@@ -23,6 +24,13 @@ class Blog extends Model
         'favorites',
         'is_published',
     ];
+
+    protected $appends = ['thumbnail'];
+
+    public function getThumbnailUrlAttribute()
+    {
+        return $this->thumbnail ? asset(Storage::disk()->url($this->thumbnail)) : null;
+    }
 
     /**
      * Relationship between the favorite table and the user table

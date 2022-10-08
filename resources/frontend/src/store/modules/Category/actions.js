@@ -3,8 +3,8 @@ import api from '../../../configs/api';
 export default {
     async getCategories({ commit }, page) {
         const { data } = await api.get('/categories?page=' + page + '&page_size=5');
-        if (data.data.data) {
-            commit('CATEGORIES', data.data);
+        if (data?.data) {
+            commit('CATEGORIES', data);
         }
     },
 
@@ -60,6 +60,17 @@ export default {
         return await api.delete('/categories/' + id).then((response) => {
             if (response && response != undefined) {
                 return response
+            }
+        }).catch((error) => {
+            console.log(error);
+            return false
+        });
+    },
+
+    async getListCategory({commit}) {
+        return await api.get('/listCategory').then((response) => {
+            if (response && response != undefined) {
+                commit("LIST_CATEGORY", response.data);
             }
         }).catch((error) => {
             console.log(error);

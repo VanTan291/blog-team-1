@@ -9,6 +9,7 @@ use Exception;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileService extends BaseService
 {
@@ -20,22 +21,24 @@ class ProfileService extends BaseService
     public function updateOrCreate($inputs)
     {
         DB::beginTransaction();
-
         try {
+            $url = Storage::disk()->put('public', $inputs['avatar']);
             $formData = [
-                'gender' => $inputs['gender'],
-                'address' => $inputs['address'],
-                'birthday' => $inputs['birthday'],
+                'gender' => $inputs['gender'] ?? null,
+                'address' => $inputs['address'] ?? null,
+                'city' => $inputs['city'] ?? null,
+                'district' => $inputs['district'] ?? null,
+                'wards' => $inputs['wards'] ?? null,
+                'birthday' => $inputs['birthday'] ?? null,
+                'education' => $inputs['education'] ?? null,
             ];
 
             $formDataUser = [
-                'name' => $inputs['name'],
-                'email' => $inputs['email'],
+                'avatar' =>$url ?? null,
             ];
 
-            $user = User::updateOrCreate(['id'  => Auth::user()->id], $formDataUser);
-
             $profile = UserProfile::updateOrCreate(['user_id'  => Auth::user()->id], $formData);
+            $user = User::updateOrCreate(['id'  => Auth::user()->id], $formDataUser);
 
             DB::commit();
 
@@ -49,6 +52,44 @@ class ProfileService extends BaseService
             DB::rollBack();
             return [
                 'code' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+    public function getProfile()
+    {
+        try {
+            $profile = $this->model->where('user_id', Auth::user()->id)->first();
+
+            $user = User::where('id', Auth::user()->id)->first();
+
+            return [
+                'status' => Response::HTTP_OK,
+                'profile' => $profile,
+                'user' => $user
+            ];
+        } catch (Exception $e) {
+            return [
+                'status' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
+    public function getUser()
+    {
+        try {
+            $user = User::where('id', Auth::user()->id)->first();
+
+            if ($user) {
+                return [
+                    'status' => Response::HTTP_OK,
+                    'data' => $user,
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'status' => Response::HTTP_FORBIDDEN,
                 'message' => $e->getMessage(),
             ];
         }

@@ -1,5 +1,92 @@
-<main class="main-content border-radius-lg ">
-    <div class="container-fluid py-4">
-    dđdddfdafdfffdf
+<div class="container-fluid py-4">
+    <div class="card p-3 bg-gradient-light">
+        <router-link :to="{ name: 'create_blog' }" class="btn btn-sm col-sm-3 btn-block btn-danger" tag="button">Thêm mới bài viết</router-link>
+        <div class="row py-2">
+            <div class="col-sm-12 col-12">
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table align-items-center mb-0">
+                            <thead>
+                                <tr>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tiêu đề</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Hình ảnh</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tên danh mục</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Tên nhãn</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Mô tả</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Trạng thái</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="item in listBlog" :key="item.id">
+                                    <td>
+                                        <div class=" px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0">{{ item.title }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class=" px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <img :src="item.thumbnail"
+                                                    style="width: 80px; height: 80px" />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class=" px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0">{{ item.category }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class=" px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0" v-for="tag in item.tags">
+                                                    <p>{{ tag.name }}</p>
+                                                </h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class=" px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <p>{{ item.description }}</p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class=" px-2 py-1">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6 class="mb-0">{{ item.status }}</h6>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="d-flex justify-content-center">
+                                        <button type="button" class="btn btn-facebook my-0 mx-1 p-2 f-item">
+                                            <span class="btn-inner--text">Sửa</span>
+                                        </button>
+                                        <button type="button" class="btn btn-youtube my-0 mx-1 p-2 f-item">
+                                            <span class="btn-inner--text">Xóa</span>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="mt-5 d-flex justify-content-center">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+</div>

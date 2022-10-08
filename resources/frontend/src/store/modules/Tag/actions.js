@@ -3,14 +3,14 @@ import api from '../../../configs/api';
 export default {
     async getListTags({ commit }, page) {
         const { data } = await api.get('/tags?page=' + page + '&page_size=5');
-        if (data.data.data) {
-            commit('TAGS', data.data);
+        if (data.data) {
+            commit('TAGS', data);
         }
     },
 
     async storeTag({commit}, parameter) {
         let formData = new FormData();
-        formData.append('status', parameter.status ? 1 : 0); 
+        formData.append('status', parameter.status ? 1 : 0);
         formData.append('name', parameter.name);
 
         return await api.post('/tags', formData).then((response) => {
@@ -41,7 +41,7 @@ export default {
     async updateTag({commit}, parameter) {
         let formData = new FormData();
         formData.append('id', parameter.id);
-        formData.append('status', parameter.status ? 1 : 0); 
+        formData.append('status', parameter.status ? 1 : 0);
         formData.append('name', parameter.name);
 
         return await api.put('/tags/' + parameter.id, parameter).then((response) => {
@@ -60,6 +60,17 @@ export default {
         return await api.delete('/tags/' + id).then((response) => {
             if (response && response != undefined) {
                 return response
+            }
+        }).catch((error) => {
+            console.log(error);
+            return false
+        });
+    },
+
+    async getListTag({commit}) {
+        return await api.get('/listTag').then((response) => {
+            if (response && response != undefined) {
+                commit("LIST_TAG", response.data);
             }
         }).catch((error) => {
             console.log(error);

@@ -2,10 +2,15 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import {utils} from '../../../../helper/function'
+import {utils} from '../../../../helper/function';
+import DatePicker from 'vue2-datepicker';
+import 'vue2-datepicker/index.css';
 
 export default {
   name: 'setupProfile',
+  components: {
+    DatePicker
+  },
   data(){
         return {
             image: ''
@@ -14,29 +19,23 @@ export default {
     mixins: [utils],
     computed: {
         ...mapGetters({
-        params: 'Profile/params',
-        requestError: 'Profile/requestError'
+            params: 'Profile/params',
+            requestError: 'Profile/requestError',
+            infoProfile: 'Profile/infoProfile',
+            infoUser: 'Profile/infoUser',
         }),
+    },
+    mounted() {
+        this.getUserProfile();
     },
     methods: {
         ...mapActions({
-            setupInfoProfile: 'Profile/setupProfile'
+            setupInfoProfile: 'Profile/setupProfile',
+            getUserProfile: 'Profile/getProfile',
         }),
-        // onImageChange(e) {
-        //     // console.log(this.params.name);
-        //     let files = e.target.files || e.dataTransfer.files;
-        //     if (!files.length)
-        //         return;
-        //     this.createImage(files[0]);
-        // },
-        // createImage(file) {
-        //     let reader = new FileReader();
-        //     let vm = this;
-        //     reader.onload = (e) => {
-        //         vm.params.image = e.target.result;
-        //     };
-        //     reader.readAsDataURL(file);
-        // },
+        uploadFile() {
+            this.params.avatar = this.$refs.avatar.files[0];
+        },
         async setup() {
             await this.setupInfoProfile(this.params)
             .then(result => {

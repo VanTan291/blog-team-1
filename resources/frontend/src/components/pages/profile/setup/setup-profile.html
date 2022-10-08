@@ -30,7 +30,8 @@
                     <p class="text-danger" v-if="requestError && requestError.message.phone">
                         {{ requestError.message.phone[0] }}
                     </p>
-                    <div class="input-group input-group-outline my-3">
+
+                    <!-- <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Email
                         </h6>
@@ -56,24 +57,64 @@
                     </div>
                     <p class="text-danger" v-if="requestError && requestError.message.confirm_password">
                         {{ requestError.message.confirm_password[0] }}
-                    </p>
+                    </p> -->
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Avatar
                         </h6>
                         <!-- <input type="file" name="avatar" class="form-control"> -->
                         <div class="col-md-6">
-                            <!-- <input type="file" v-on:change="onImageChange" class="form-control"> -->
+                            <!-- <input type="file" v-on:change="uploadFile" class="form-control" ref="avatar"> -->
+                            <input type="file" placeholder="avatar" @change="uploadFile" class="form-control" ref="avatar">
                         </div>
-                        <div class="col-md-3" v-if="params.image">
-                            <!-- <img :src="image" class="img-responsive" height="70" width="90"> -->
+                        <div class="col-md-3" v-if="params.avatar">
+                            <img :src="params.avatar" class="img-responsive" height="70" width="90">
                         </div>
                     </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.avatar">
+                        {{ requestError.message.avatar[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Học vấn
+                        </h6>
+                        <input type="text" name="education" v-model="params.education"  placeholder="Trình độ học vấn" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.education">
+                        {{ requestError.message.education[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Thành phố
+                        </h6>
+                        <input type="text" name="city" v-model="params.city" placeholder="Thành phố" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.city">
+                        {{ requestError.message.city[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Quận/Huyện
+                        </h6>
+                        <input type="text" name="district" v-model="params.district" placeholder="Quận/Huyện" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.district">
+                        {{ requestError.message.district[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Phường/Xã
+                        </h6>
+                        <input type="text" name="wards" v-model="params.wards" placeholder="Phường/Xã" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.wards">
+                        {{ requestError.message.wards[0] }}
+                    </p>
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Địa chỉ
                         </h6>
-                        <input type="text" v-model="params.address" name="address" placeholder="Địa chỉ" class="form-control">
+                        <input type="text" v-model="params.address"  name="address" placeholder="Địa chỉ" class="form-control">
                     </div>
                     <p class="text-danger" v-if="requestError && requestError.message.address">
                         {{ requestError.message.address[0] }}
@@ -82,7 +123,19 @@
                         <h6 class="w-100">
                             Giới tính
                         </h6>
-                        <input type="text" v-model="params.gender" name="gender" placeholder="Giới tính" class="form-control">
+                            <label>
+                                <input type="radio" id="0" name="gender" v-model="params.gender" v-if="params.gender == 0" checked value="0">
+                                <input type="radio" id="0" name="gender" v-model="params.gender" v-else  value="0">
+                                Nam
+                            </label>
+
+                            <label class="mx-5">
+                                <input type="radio" id="1" name="gender" v-model="params.gender" v-if="params.gender == 1" value="1">
+                                <input type="radio" id="1" name="gender" v-model="params.gender" v-else value="1">
+                                Nữ
+                            </label>
+
+                        <!-- <input type="text" v-model="params.gender" name="gender" placeholder="Giới tính" class="form-control"> -->
                     </div>
                     <p class="text-danger" v-if="requestError && requestError.message.gender">
                         {{ requestError.message.gender[0] }}
@@ -91,7 +144,7 @@
                         <h6 class="w-100">
                             Ngày sinh
                         </h6>
-                        <input type="date" v-model="params.birthday" name="birthday" placeholder="Ngày" class="form-control">
+                        <data-picker type="date" v-model="params.birthday" name="birthday" placeholder="Ngày" class="form-control"></data-picker>
                     </div>
                     <p class="text-danger" v-if="requestError && requestError.message.birthday">
                         {{ requestError.message.birthday[0] }}

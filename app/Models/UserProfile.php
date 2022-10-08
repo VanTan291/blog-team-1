@@ -17,6 +17,7 @@ class UserProfile extends Model
         'address',
         'gender',
         'birthday',
+        'education',
     ];
 
     /**

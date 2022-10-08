@@ -20,10 +20,29 @@ class ProfileRequest extends BaseRequest
             'phone' => [
                 'required',
             ],
+            'gender' => [
+                'required',
+            ],
             'address' => [
                 'required',
                 'max:255',
             ],
+            'city' => [
+                'required',
+            ],
+            'district' => [
+                'required',
+            ],
+            'wards' => [
+                'required',
+            ],
+            'education' => [
+                'required',
+            ],
+            'avatar' => [
+                'required',
+                'image',
+            ]
         ];
     }
 }
