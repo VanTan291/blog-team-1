@@ -22,7 +22,6 @@ class ProfileController extends BaseController
 
     public function setupProfile(ProfileRequest $request)
     {
-        // dd($request->all());
         $result = $this->profileService->updateOrCreate($request->all());
 
         if ($result['code'] != Response::HTTP_OK) {
@@ -30,11 +29,6 @@ class ProfileController extends BaseController
         }
 
         return response()->apiSuccess($result);
-        // if ($result['code'] == Response::HTTP_OK) {
-        //     return $this->responseSuccess($result);
-        // }
-
-        // return $this->responseErrors($result['message']);
     }
 
     public function getProfile()
@@ -47,7 +41,6 @@ class ProfileController extends BaseController
                 'dataUser' => UserResource::make($userProfile['user']),
             ]);
         }
-
 
         return response()->apiErrors($userProfile);
     }

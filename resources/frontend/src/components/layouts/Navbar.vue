@@ -64,22 +64,12 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
                         aria-labelledby="dropdownMenuProfile">
-                        <!-- <div class="d-none d-lg-block">
-                            <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
-                                Setup profile
-                            </h6> -->
-                            <router-link :to="{ name: 'profile' }" class="dropdown-item border-radius-md">
-                                <span>My profile</span>
-                            </router-link>
-                            <router-link :to="{ name: 'setupProfile' }" class="dropdown-item border-radius-md">
-                                <span>Set up profile</span>
-                            </router-link>
-                        <!-- </div>
-                        <div class="d-lg-none">
-                            <a href="" class="dropdown-item border-radius-md">
-                                <span>Set up profile</span>
-                            </a>
-                        </div> -->
+                        <router-link :to="{ name: 'profile' }" class="dropdown-item border-radius-md">
+                            <span>My profile</span>
+                        </router-link>
+                        <router-link :to="{ name: 'setupProfile' }" class="dropdown-item border-radius-md">
+                            <span>Set up profile</span>
+                        </router-link>
                     </div>
                   </li>
                 </router-link>

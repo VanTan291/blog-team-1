@@ -16,8 +16,6 @@ export default {
         ...mapGetters({
             params: 'Profile/params',
             requestError: 'Profile/requestError',
-            infoProfile: 'Profile/infoProfile',
-            infoUser: 'Profile/infoUser',
         }),
     },
     mounted() {

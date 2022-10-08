@@ -10,7 +10,6 @@
               </div>
             </div>
             <div class="card-body">
-                <!-- <div class="loader"></div> -->
                 <form class="text-start" @submit.prevent="setup">
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
@@ -30,41 +29,11 @@
                     <p class="text-danger" v-if="requestError && requestError.message.phone">
                         {{ requestError.message.phone[0] }}
                     </p>
-
-                    <!-- <div class="input-group input-group-outline my-3">
-                        <h6 class="w-100">
-                            Email
-                        </h6>
-                        <input type="email" name="email" v-model="params.email" placeholder="Email" class="form-control">
-                    </div>
-                    <p class="text-danger" v-if="requestError && requestError.message.email">
-                        {{ requestError.message.email[0] }}
-                    </p>
-                    <div class="input-group input-group-outline my-3">
-                        <h6 class="w-100">
-                            Password
-                        </h6>
-                        <input type="password" name="password" v-model="params.password" placeholder="Password" class="form-control">
-                    </div>
-                    <p class="text-danger" v-if="requestError && requestError.message.password">
-                        {{ requestError.message.password[0] }}
-                    </p>
-                    <div class="input-group input-group-outline my-3">
-                        <h6 class="w-100">
-                            Confirm Password
-                        </h6>
-                        <input type="password" name="confirm_password" v-model="params.confirm_password" placeholder="Confirm Password" class="form-control">
-                    </div>
-                    <p class="text-danger" v-if="requestError && requestError.message.confirm_password">
-                        {{ requestError.message.confirm_password[0] }}
-                    </p> -->
                     <div class="input-group input-group-outline my-3">
                         <h6 class="w-100">
                             Avatar
                         </h6>
-                        <!-- <input type="file" name="avatar" class="form-control"> -->
                         <div class="col-md-6">
-                            <!-- <input type="file" v-on:change="uploadFile" class="form-control" ref="avatar"> -->
                             <input type="file" placeholder="avatar" @change="uploadFile" class="form-control" ref="avatar">
                         </div>
                         <div class="col-md-3" v-if="params.avatar">
@@ -123,19 +92,17 @@
                         <h6 class="w-100">
                             Giới tính
                         </h6>
-                            <label>
-                                <input type="radio" id="0" name="gender" v-model="params.gender" v-if="params.gender == 0" checked value="0">
-                                <input type="radio" id="0" name="gender" v-model="params.gender" v-else  value="0">
-                                Nam
-                            </label>
+                        <label>
+                            <input type="radio" id="0" name="gender" v-model="params.gender" v-if="params.gender == 0" checked value="0">
+                            <input type="radio" id="0" name="gender" v-model="params.gender" v-else  value="0">
+                            Nam
+                        </label>
 
-                            <label class="mx-5">
-                                <input type="radio" id="1" name="gender" v-model="params.gender" v-if="params.gender == 1" value="1">
-                                <input type="radio" id="1" name="gender" v-model="params.gender" v-else value="1">
-                                Nữ
-                            </label>
-
-                        <!-- <input type="text" v-model="params.gender" name="gender" placeholder="Giới tính" class="form-control"> -->
+                        <label class="mx-5">
+                            <input type="radio" id="1" name="gender" v-model="params.gender" v-if="params.gender == 1" value="1">
+                            <input type="radio" id="1" name="gender" v-model="params.gender" v-else value="1">
+                            Nữ
+                        </label>
                     </div>
                     <p class="text-danger" v-if="requestError && requestError.message.gender">
                         {{ requestError.message.gender[0] }}
