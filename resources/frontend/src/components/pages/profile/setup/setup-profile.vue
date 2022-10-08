@@ -3,14 +3,9 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import {utils} from '../../../../helper/function';
-import DatePicker from 'vue2-datepicker';
-import 'vue2-datepicker/index.css';
 
 export default {
   name: 'setupProfile',
-  components: {
-    DatePicker
-  },
   data(){
         return {
             image: ''

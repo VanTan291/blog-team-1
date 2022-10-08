@@ -7,8 +7,7 @@ export default {
     name: 'profile',
     computed: {
         ...mapGetters({
-            infoProfile: 'Profile/infoProfile',
-            infoUser: 'Profile/infoUser',
+            params: 'Profile/params',
         }),
     },
     mounted() {

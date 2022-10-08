@@ -12,7 +12,6 @@ import Blog from '../components/pages/bloggers/blogs';
 import CreateBlog from '../components/pages/bloggers/blogs/create.vue';
 import SetupProfile from '../components/pages/profile/setup/setup-profile.vue'
 
-//
 import DetailBlog from "../components/pages/detail/detail.vue";
 
 const routes = [

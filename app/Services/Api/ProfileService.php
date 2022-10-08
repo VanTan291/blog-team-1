@@ -21,6 +21,7 @@ class ProfileService extends BaseService
     public function updateOrCreate($inputs)
     {
         DB::beginTransaction();
+
         try {
             $url = Storage::disk()->put('public', $inputs['avatar']);
             $formData = [
