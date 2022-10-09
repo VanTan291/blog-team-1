@@ -1,0 +1,63 @@
+<div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6 mb-4">
+    <section class="py-sm-5 py-2 position-relative">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 mx-auto">
+                    <div class="row py-5">
+                        <div class="col-lg-8 col-md-8 z-index-2 position-relative px-md-2 px-sm-5 mx-auto">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h3 class="mb-0">{{ detailBlog.title }}</h3>
+                                <div class="d-block">
+                                    <button type="button"
+                                        class="btn btn-sm btn-outline-info text-nowrap mb-0">Follow</button>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <div class="col-auto">
+                                    <span>{{ detailBlog.create_date }}</span>
+                                </div>
+                            </div>
+                            <img :src="detailBlog.thumbnail" alt="img-blur-shadow" class="img-fluid shadow border-radius-lg" loading="lazy">
+                            <p class="text-lg mb-3">
+                                {{ detailBlog.description }}
+                            </p>
+
+                            <p class="text-lg mb-5" v-html=" detailBlog.content"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-3" v-if="listOfRelatedBlogs.lenght > 0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <h3 class="mb-5">Các bài viết liên quan</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6" v-for="item in listOfRelatedBlogs">
+                    <div class="card card-plain">
+                        <div class="card-header p-0 position-relative">
+                            <a class="d-block blur-shadow-image">
+                                <img :src="item.thumbnail" alt="img-blur-shadow"
+                                    class="img-fluid shadow border-radius-lg" loading="lazy" style="width: 250px; height: 300px !important;">
+                            </a>
+                        </div>
+                        <div class="card-body px-0">
+                            <h5>
+                                <a href="javascript:;" class="text-dark font-weight-bold">{{ item.title }}</a>
+                            </h5>
+                            <p>{{ item.description }}</p>
+                            <a href="javascript:;" @click="showDetail(item.id)" class="text-info text-sm icon-move-right">Đọc tiếp
+                                <i class="fas fa-arrow-right text-xs ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- END Blogs w/ 4 cards w/ image & text & link -->
+</div>

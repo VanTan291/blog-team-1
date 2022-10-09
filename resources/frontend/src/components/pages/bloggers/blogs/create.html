@@ -40,6 +40,14 @@
                     {{errorRequest.message.title[0] }}
                 </p>
             </div>
+            <div>
+                <div class="input-group input-group-outline my-3">
+                    <textarea type="text" placeholder="Mô tả" v-model="params.description" class="form-control" cols="3"></textarea>
+                </div>
+                <p class="text-danger" v-if="errorRequest && errorRequest.message.description">
+                    {{errorRequest.message.description[0] }}
+                </p>
+            </div>
             <ckeditor :editor="editor" v-model="params.content" :config="editorConfig"></ckeditor>
             <p class="text-danger" v-if="errorRequest && errorRequest.message.content">
                 {{errorRequest.message.content[0] }}
