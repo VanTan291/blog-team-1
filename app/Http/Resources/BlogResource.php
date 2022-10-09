@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Bookmark;
 use Carbon\Carbon;
 
 class BlogResource extends BaseResource
@@ -22,7 +23,11 @@ class BlogResource extends BaseResource
             'favorites' => $this->favorites,
             'tags' => $this->when($this->tags, $this->tags ?? ''),
             'status' => $this->is_published,
-            'create_date' => $create_date->diffForHumans(Carbon::now())
+            'create_date' => $create_date->diffForHumans(Carbon::now()),
+            'check_bookmark' => $this->when(Bookmark::where([
+                'blog_id' => $this->id,
+                'user_id' => auth()->user()->id,
+            ])->exists(), true)
         ];
     }
 }

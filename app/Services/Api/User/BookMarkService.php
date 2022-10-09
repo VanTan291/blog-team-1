@@ -36,12 +36,9 @@ class BookMarkService extends BaseService
 
     public function store($blog) {
         try {
-            $makeBookMark = $this->model->updateOrCreate([
-                [
-                    'blog_id' => $blog->id,
-                    'user_id' => auth()->user()->id
-                ],
-                ['status' => !$blog->bookmarks->status ?? true]
+            $makeBookMark = $this->model->create([
+                'blog_id' => $blog->id,
+                'user_id' => auth()->user()->id
             ]);
 
             return [
@@ -55,5 +52,25 @@ class BookMarkService extends BaseService
                 'code' => Response::HTTP_FORBIDDEN,
             ];
         } 
+    }
+
+    public function destroy ($blogId)
+    {
+        try {
+            $this->model->where([
+                    'blog_id' => $blogId,
+                    'user_id' => auth()->user()->id
+            ])->delete();
+
+            return [
+                'code' => Response::HTTP_OK
+            ];
+        }catch (Exception $e) {
+            Log::info($e);
+
+            return [
+                'code' => Response::HTTP_FORBIDDEN
+            ];
+        }
     }
 }

@@ -12,6 +12,19 @@
     z-index: 1;
 }
 
+.red {
+    color: rgb(217, 0, 0);
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.pointer:hover {
+    transition: transform .3s ease;
+    transform: scale(1.5);
+  }
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

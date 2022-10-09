@@ -34,7 +34,7 @@
     <link href="{{ asset('blogger/assets/css/nucleo-icons.css') }}" rel="stylesheet" />
     <link href="{{ asset('blogger/assets/css/nucleo-svg.css') }}" rel="stylesheet" />
     <link id="pagestyle" href="{{ asset('blogger/assets/css/material-dashboard.css?v=3.0.4') }}" rel="stylesheet" />
-
+    <script src="https://kit.fontawesome.com/ef5f86f236.js" crossorigin="anonymous"></script>
     @stack('styles')
 </head>
 
