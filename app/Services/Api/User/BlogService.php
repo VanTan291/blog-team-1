@@ -54,6 +54,27 @@ class BlogService extends BaseService
         }
     }
 
+    public function listBookmarks()
+    {
+        try {
+            $blogs = $this->model->whereHas('bookmarks', function($q) {
+                $q->where('user_id', auth()->user()->id);
+            });
+
+            if ($blogs) {
+                return [
+                    'status' => Response::HTTP_OK,
+                    'data' => $blogs,
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'status' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
     public function getListSeries()
     {
         return BlogSeries::all();

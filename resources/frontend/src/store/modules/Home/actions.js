@@ -28,4 +28,18 @@ export default {
                 return false;
             });
     },
+
+    async getListBookmarks({ commit }, params) {
+        return await api
+            .get(`list-bookmarks?page=${params.page}`)
+            .then((response) => {
+                if (response && response != undefined) {
+                    commit("LIST_BOOKMARKS", response.data);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                return false;
+            });
+    },
 };

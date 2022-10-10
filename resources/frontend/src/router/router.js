@@ -10,6 +10,7 @@ import Blogger from '../components/pages/bloggers/layouts/App.vue';
 import Dashboard from '../components/pages/bloggers/dashboard';
 import Blog from '../components/pages/bloggers/blogs';
 import CreateBlog from '../components/pages/bloggers/blogs/create.vue';
+import ListBookmarks from '../components/pages/bookmarks/index.vue';
 
 //
 import DetailBlog from "../components/pages/detail/detail.vue";
@@ -33,6 +34,12 @@ const routes = [
                 path: "/profile",
                 component: Profile,
                 name: "profile",
+                meta: { requiresAuth: true },
+            },
+            {
+                path: "/list-bookmarks",
+                component: ListBookmarks,
+                name: "list_bookmarks",
                 meta: { requiresAuth: true },
             },
         ],

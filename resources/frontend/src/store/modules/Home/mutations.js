@@ -9,4 +9,7 @@ export default {
         state.detailBlog = response.data;
         state.listOfRelatedBlogs = response.listOfRelatedBlogs;
     },
+    LIST_BOOKMARKS(state, response) {
+        state.listBookmarks = response;
+    }
 };

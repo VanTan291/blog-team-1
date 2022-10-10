@@ -1,0 +1,46 @@
+<div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6">
+    <section class="pb-5 position-relative mx-n3">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 text-start mb-5 mt-5">
+                    <h3 class="z-index-1 position-relative">Bài viết nổi bật</h3>
+                    <p class="opacity-8 mb-0">Trao dồi kiến thức đi bạn ơi.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-12 mb-4 mt-4" v-for="item in listBookmarks.data" :key="item.id">
+                    <div class="card card-profile mt-4">
+                        <router-link :to="{ name: 'detail', params: { id: item.id } }">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-12">
+                                    <a href="javascript:;">
+                                        <div class="p-3 pe-md-0">
+                                            <img class="w-100 border-radius-md shadow-lg" :src="item.thumbnail"
+                                                alt="image" style="width:100px; height: 100px">
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-lg-8 col-md-6 col-12 my-auto">
+                                    <div class="card-body ps-lg-0">
+                                        <h5 class="mb-0">{{ item.title }}</h5>
+                                        <h6 class="text-info">{{ item.create_date }}</h6>
+                                        <p class="mb-0">{{ item.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </router-link>
+                        <div class="d-flex flex-row-reverse">
+                            <i class="fa-solid fa-bookmark p-3 fa-lg pointer" :class="item.check_bookmark ? 'red' : ''"
+                                @click="bookMark(item.id)"></i>
+                            <i class="fa-regular fa-heart p-3 fa-lg"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="mt-5 d-flex justify-content-center">
+        <pagination :data="listBookmarks" :size="size" @pagination-change-page="getListBookmarks" :limit="1">
+        </pagination>
+    </div>
+</div>

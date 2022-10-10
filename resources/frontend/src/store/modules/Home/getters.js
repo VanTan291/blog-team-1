@@ -5,4 +5,5 @@ export default {
     listBlog: (state) => state.listBlog,
     detailBlog: (state) => state.detailBlog,
     listOfRelatedBlogs: (state) => state.listOfRelatedBlogs,
+    listBookmarks: (state) => state.listBookmarks
 };

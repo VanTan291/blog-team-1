@@ -164,4 +164,18 @@ class BlogController extends Controller
 
         return response()->apiErrors($result['message']);
     }
+
+    public function getListBookmarks(Request $request)
+    {
+        $result = $this->blogService->listBookmarks();
+
+        if ($result['status'] == Response::HTTP_OK) {
+            return response()->apiSuccess([
+                'data' => BlogResource::apiPaginate($result['data'], $request),
+                'code' => Response::HTTP_OK
+            ]);
+        }
+
+        return response()->apiErrors($result['message']);
+    }
 }
