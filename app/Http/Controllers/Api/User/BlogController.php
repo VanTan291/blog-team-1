@@ -162,6 +162,6 @@ class BlogController extends Controller
             ]);
         }
 
-        return response()->apiErrors($result['message']);
+        return response()->apiErrors($getListOfRelatedBlogs['message']);
     }
 }

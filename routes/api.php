@@ -6,6 +6,7 @@ use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\User\BlogController;
+use App\Http\Controllers\Api\User\BookMarkController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +35,6 @@ Route::group(['middleware' => ['auth.user']], function () {
     Route::get('listTag', [TagController::class, 'getListTag']);
     Route::resource('blogs', BlogController::class);
     Route::get('listSeries', [BlogController::class, 'getListSeries']);
+    Route::get('book-mark/{blog}', [BookMarkController::class, 'store']);
 });
 
