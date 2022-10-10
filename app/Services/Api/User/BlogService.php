@@ -168,4 +168,22 @@ class BlogService extends BaseService
             ];
         }
     }
+
+    public function destroy($blog)
+    {
+        try {
+            $blog->delete();
+
+            if ($blog) {
+                return [
+                    'status' => Response::HTTP_OK,
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'status' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
 }

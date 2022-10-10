@@ -115,9 +115,17 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Blog $blog)
     {
-        //
+        $result = $this->blogService->destroy($blog);
+
+        if ($result['status'] == Response::HTTP_OK) {
+             return response()->apiSuccess([
+                'code' => Response::HTTP_OK,
+            ]);
+        }
+
+        return response()->apiErrors($result['message']);
     }
 
     public function getListSeries()
