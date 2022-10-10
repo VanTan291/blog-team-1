@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
@@ -76,6 +77,11 @@ class User extends Authenticatable implements JWTSubject
         $this->attributes['password'] = (string) Hash::make($value);
 
         return true;
+    }
+
+    public function getAvatarUrlAttribute()
+    {
+        return $this->avatar ? asset(Storage::disk()->url($this->avatar)) : null;
     }
 
     /**

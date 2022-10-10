@@ -1,0 +1,130 @@
+<div class="min-vh-100" style="background-image: url('https://images.unsplash.com/photo-1497294815431-9365093b7331?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1950&q=80');" loading="lazy">
+    <!-- <span class="mask bg-gradient-dark opacity-6"></span>  -->
+    <div class="container my-auto">
+      <div class="row">
+        <div class="col-lg-8 col-12 mx-auto">
+          <div class="card card-setup-profile">
+            <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+              <div class="bg-gradient-dark shadow-dark border-radius-lg py-3 pe-1">
+                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Set up profile</h4>
+              </div>
+            </div>
+            <div class="card-body">
+                <form class="text-start" @submit.prevent="setup">
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Tên
+                        </h6>
+                        <input type="text" name="name" v-model="params.name" placeholder="Tên" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.name">
+                        {{ requestError.message.name[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Số điện thoại
+                        </h6>
+                        <input type="text" name="phone" v-model="params.phone" placeholder="Số điện thoại" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.phone">
+                        {{ requestError.message.phone[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Avatar
+                        </h6>
+                        <div class="col-md-6">
+                            <input type="file" placeholder="avatar" @change="uploadFile" class="form-control" ref="avatar">
+                        </div>
+                        <div class="col-md-3" v-if="params.avatar">
+                            <img :src="params.avatar" class="img-responsive" height="70" width="90">
+                        </div>
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.avatar">
+                        {{ requestError.message.avatar[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Học vấn
+                        </h6>
+                        <input type="text" name="education" v-model="params.education"  placeholder="Trình độ học vấn" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.education">
+                        {{ requestError.message.education[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Thành phố
+                        </h6>
+                        <input type="text" name="city" v-model="params.city" placeholder="Thành phố" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.city">
+                        {{ requestError.message.city[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Quận/Huyện
+                        </h6>
+                        <input type="text" name="district" v-model="params.district" placeholder="Quận/Huyện" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.district">
+                        {{ requestError.message.district[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Phường/Xã
+                        </h6>
+                        <input type="text" name="wards" v-model="params.wards" placeholder="Phường/Xã" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.wards">
+                        {{ requestError.message.wards[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Địa chỉ
+                        </h6>
+                        <input type="text" v-model="params.address"  name="address" placeholder="Địa chỉ" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.address">
+                        {{ requestError.message.address[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Giới tính
+                        </h6>
+                        <label>
+                            <input type="radio" id="0" name="gender" v-model="params.gender" v-if="params.gender == 0" checked value="0">
+                            <input type="radio" id="0" name="gender" v-model="params.gender" v-else  value="0">
+                            Nam
+                        </label>
+
+                        <label class="mx-5">
+                            <input type="radio" id="1" name="gender" v-model="params.gender" v-if="params.gender == 1" value="1">
+                            <input type="radio" id="1" name="gender" v-model="params.gender" v-else value="1">
+                            Nữ
+                        </label>
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.gender">
+                        {{ requestError.message.gender[0] }}
+                    </p>
+                    <div class="input-group input-group-outline my-3">
+                        <h6 class="w-100">
+                            Ngày sinh
+                        </h6>
+                        <input type="date" v-model="params.birthday" name="birthday" placeholder="Ngày" class="form-control">
+                    </div>
+                    <p class="text-danger" v-if="requestError && requestError.message.birthday">
+                        {{ requestError.message.birthday[0] }}
+                    </p>
+                    <div class="text-center">
+                        <button type="submit"
+                            class="btn bg-gradient-dark w-100 my-4 mb-2"
+                            >Đăng ký</button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
