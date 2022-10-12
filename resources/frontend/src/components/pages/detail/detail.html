@@ -9,7 +9,9 @@
                                 <h3 class="mb-0">{{ detailBlog.title }}</h3>
                                 <div class="d-block">
                                     <button type="button"
-                                        class="btn btn-sm btn-outline-info text-nowrap mb-0">Follow</button>
+                                        class="btn btn-sm btn-outline-info text-nowrap mb-0"
+                                        v-if="$store.state.isLogin && !detailBlog.is_follow"
+                                        @click="follow(detailBlog.user_id)">Follow</button>
                                 </div>
                             </div>
                             <div class="row mb-4">

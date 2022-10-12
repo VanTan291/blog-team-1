@@ -37,7 +37,7 @@ export default {
                     this.toastError(result.message);
                 }
             }).catch(e => {
-                this.toastError('đã có lỗi');
+                this.toastError('Bạn cần đăng nhập');
                 console.log(e);
             })
         }

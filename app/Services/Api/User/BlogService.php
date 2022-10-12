@@ -18,6 +18,8 @@ use App\Models\Tag;
 use App\Models\Taggable;
 use Illuminate\Support\Facades\Storage;
 use App\Enums\BlogStatus;
+use App\Models\Follow;
+use App\Enums\NotificationStatus;
 
 /**
  * Class BlogService
@@ -196,6 +198,28 @@ class BlogService extends BaseService
             $blog->delete();
 
             if ($blog) {
+                return [
+                    'status' => Response::HTTP_OK,
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'status' => Response::HTTP_FORBIDDEN,
+                'message' => $e->getMessage(),
+            ];
+        }
+    }
+
+    public function follow($params)
+    {
+        try {
+            $follow = Follow::create([
+                'from_user_id' => auth()->user()->id,
+                'to_user_id' => $params['user_id'],
+                'mail_notification' => NotificationStatus::ACTIVE,
+            ]);
+
+            if ($follow) {
                 return [
                     'status' => Response::HTTP_OK,
                 ];

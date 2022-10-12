@@ -54,8 +54,8 @@
                                 </div>
                             </div>
                         </router-link>
-                        <div class="d-flex flex-row-reverse">
-                            <i class="fa-solid fa-bookmark p-3 fa-lg pointer" 
+                        <div class="d-flex flex-row-reverse" v-if="$store.state.isLogin">
+                            <i class="fa-solid fa-bookmark p-3 fa-lg pointer"
                                 :class="item.check_bookmark ? 'red' : ''"
                                 @click="bookMark(item.id)"></i>
                             <i class="fa-regular fa-heart p-3 fa-lg"></i>

@@ -40,4 +40,5 @@ Route::group(['middleware' => ['auth.user']], function () {
     Route::get('listSeries', [BlogController::class, 'getListSeries']);
     Route::get('list-bookmarks', [BlogController::class, 'getListBookmarks']);
     Route::get('book-mark/{blog}', [BookMarkController::class, 'store']);
+    Route::post('follow', [BlogController::class, 'follow']);
 });

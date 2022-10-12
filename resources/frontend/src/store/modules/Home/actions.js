@@ -49,5 +49,18 @@ export default {
         }).catch(e => {
             console.log(e);
         })
+    },
+
+    async follow({}, userId) {
+        let formData = new FormData();
+        formData.append('user_id', userId ?? '');
+
+        return await api.post('follow', formData).then((response) => {
+            if (response && response != undefined) {
+                return response
+            }
+        }).catch((error) => {
+            return false
+        });
     }
 };

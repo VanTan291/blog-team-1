@@ -186,4 +186,16 @@ class BlogController extends Controller
 
         return response()->apiErrors($result['message']);
     }
+
+    public function follow(Request $request) {
+        $result = $this->blogService->follow($request->all());
+
+        if ($result['status'] == Response::HTTP_OK) {
+             return response()->apiSuccess([
+                'code' => Response::HTTP_OK,
+            ]);
+        }
+
+        return response()->apiErrors($result['message']);
+    }
 }
