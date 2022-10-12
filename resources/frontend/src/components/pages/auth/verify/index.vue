@@ -33,10 +33,10 @@ export default {
 
         await this.verifyEmailCode(this.params)
         .then(result => {
-            //alert('ss');
             if (result.code == 200) {
                 this.toastSuccess(result.message);
                 this.$router.push({ name: 'home' })
+                window.location.reload();
             }
 
             this.loader = false;
@@ -59,14 +59,7 @@ export default {
             this.isDisable = false;
 
             if (result.code == 200) {
-                this.$notify({
-                    group: 'auth',
-                    type: 'success',
-                    title: 'Thông báo',
-                    text: result.message,
-                    duration: 3000,
-                    speed: 300
-                });
+                this.toastSuccess(result.message);
             }
         })
         .catch(error => {

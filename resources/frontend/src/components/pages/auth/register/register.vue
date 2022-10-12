@@ -2,6 +2,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
+import {utils} from '../../../../helper/function'
 
 export default {
   name: "register",
@@ -11,6 +12,7 @@ export default {
         isDisable: false,
     };
   },
+  mixins: [utils],
   computed: {
     ...mapGetters({
       params: 'Auth/params',
@@ -28,15 +30,7 @@ export default {
         await this.registerAccount(this.params)
         .then(result => {
             if (result.code == 200) {
-                this.$notify({
-                    group: 'auth',
-                    type: 'success',
-                    title: 'Thông báo',
-                    text: result.message,
-                    duration: 3000,
-                    speed: 300
-                });
-
+                this.toastSuccess(result.message);
                 this.$router.push({ name: 'verify' })
             }
 

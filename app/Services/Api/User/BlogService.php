@@ -77,7 +77,7 @@ class BlogService extends BaseService
 
     public function getListSeries()
     {
-        return BlogSeries::all();
+        return BlogSeries::where('user_id', auth()->user()->id)->get();
     }
 
     public function createBlog(User $user, $params)
