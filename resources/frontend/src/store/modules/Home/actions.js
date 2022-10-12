@@ -42,4 +42,12 @@ export default {
                 return false;
             });
     },
+
+    async BookMark ({}, id) {
+        return await api.get(`book-mark/${id}`).then(result => {
+            return result;
+        }).catch(e => {
+            console.log(e);
+        })
+    }
 };

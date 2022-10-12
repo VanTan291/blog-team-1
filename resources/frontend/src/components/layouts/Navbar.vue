@@ -54,10 +54,24 @@
                   </div>
                 </li>
                 <router-link :to="{ name: 'profile' }" tag="li" class="nav-item mx-2" v-if="$store.state.isLogin">
-                  <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" v-bind:class="(urlSegment[1] == 'profile') ? 'activeSidebar' : ''">
-                    <i class="material-icons opacity-6 me-2 text-md">assignment_ind</i>
-                    Profile
-                  </a>
+                  <li class="nav-item dropdown dropdown-hover mx-2">
+                    <a class="nav-link ps-2 d-flex cursor-pointer align-items-center" id="dropdownMenuProfile"
+                      data-bs-toggle="dropdown" aria-expanded="false"
+                      v-bind:class="(urlSegment[1] == 'profile') ? 'activeSidebar' : ''">
+                        <i class="material-icons opacity-6 me-2 text-md">assignment_ind</i>
+                        Profile
+                        <img src="/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-auto ms-md-2">
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-animation ms-n3 dropdown-md p-3 border-radius-xl mt-0 mt-lg-3"
+                        aria-labelledby="dropdownMenuProfile">
+                        <router-link :to="{ name: 'profile' }" class="dropdown-item border-radius-md">
+                            <span>My profile</span>
+                        </router-link>
+                        <router-link :to="{ name: 'setupProfile' }" class="dropdown-item border-radius-md">
+                            <span>Set up profile</span>
+                        </router-link>
+                    </div>
+                  </li>
                 </router-link>
                 <li tag="li" class="nav-item mx-2" v-if="$store.state.isLogin">
                   <a class="nav-link ps-2 d-flex cursor-pointer align-items-center"  @click="onLogout">

@@ -27,7 +27,6 @@ export default {
                 console.log(error);
                 return false;
             });
-
     },
 
     async store({ commit }, params) {
@@ -51,6 +50,20 @@ export default {
             })
             .catch((error) => {
                 commit("ERRORS", error.response.data);
+            });
+    },
+
+    async deleteBlog({}, id) {
+        return await api
+            .delete("/blogs/" + id)
+            .then((response) => {
+                if (response && response != undefined) {
+                    return response;
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+                return false;
             });
     },
 };

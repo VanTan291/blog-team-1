@@ -11,6 +11,7 @@ import Dashboard from '../components/pages/bloggers/dashboard';
 import Blog from '../components/pages/bloggers/blogs';
 import CreateBlog from '../components/pages/bloggers/blogs/create.vue';
 import ListBookmarks from '../components/pages/bookmarks/index.vue';
+import SetupProfile from '../components/pages/profile/setup/setup-profile.vue'
 
 //
 import DetailBlog from "../components/pages/detail/detail.vue";
@@ -42,8 +43,15 @@ const routes = [
                 name: "list_bookmarks",
                 meta: { requiresAuth: true },
             },
+            {
+                path: '/profile/set-up',
+                component: SetupProfile,
+                name: 'setupProfile',
+                meta: { requiresAuth: true },
+            },
         ],
     },
+
     {
         path: "/login",
         component: Login,
