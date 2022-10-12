@@ -14,7 +14,7 @@
                 <div class="d-flex justify-content-between align-items-center mb-2">
                   <h3 class="mb-0">{{ params.name }}</h3>
                   <div class="d-block">
-                    <button type="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">Follow</button>
+                    <router-link :to="{ name: 'list_bookmarks' }" tag="button" class="btn btn-sm btn-outline-info text-nowrap mb-0">danh sách bài viết đã lưu</router-link>
                   </div>
                 </div>
                 <div class="row mb-4">
