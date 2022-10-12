@@ -3,4 +3,5 @@ export default {
     listBlog: {},
     detailBlog: {},
     listOfRelatedBlogs: {},
+    listBookmarks: {}
 };
