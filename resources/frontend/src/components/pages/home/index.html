@@ -58,7 +58,10 @@
                             <i class="fa-solid fa-bookmark p-3 fa-lg pointer"
                                 :class="item.check_bookmark ? 'red' : ''"
                                 @click="bookMark(item.id)"></i>
-                            <i class="fa-regular fa-heart p-3 fa-lg"></i>
+                            <i class=" fa-heart p-3 fa-lg pointer"
+                                :class="item.check_favorite ? 'fa-solid red' : 'fa-regular'"
+                                @click="favorite(item.id)">
+                        </i>
                           </div>
                     </div>
                 </div>
