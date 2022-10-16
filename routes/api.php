@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\User\BlogController;
 use App\Http\Controllers\Api\User\BookMarkController;
+use App\Http\Controllers\Api\User\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +42,5 @@ Route::group(['middleware' => ['auth.user']], function () {
     Route::get('list-bookmarks', [BlogController::class, 'getListBookmarks']);
     Route::get('book-mark/{blog}', [BookMarkController::class, 'store']);
     Route::post('follow', [BlogController::class, 'follow']);
+    Route::get('add-favorite-blog/{blog}', [FavoriteController::class, 'favorite']);
 });

@@ -26,7 +26,8 @@ export default {
     methods: {
         ...mapActions({
             getListBlogHome: 'Home/getListBlogHome',
-            createBookMark: 'Home/BookMark'
+            createBookMark: 'Home/BookMark',
+            AddFavorite: 'Home/favorite'
         }),
 
         async bookMark(id) {
@@ -34,6 +35,20 @@ export default {
                 if (result['code'] == 200) {
                     this.getListBlogHome(this.param)
                 } else {
+                    this.toastError(result.message);
+                }
+            }).catch(e => {
+                this.toastError('Bạn cần đăng nhập');
+                console.log(e);
+            })
+        },
+
+        async favorite(id) {
+            await this.AddFavorite(id).then(result => {
+                if (result['code'] == 200) {
+                    this.getListBlogHome(this.param)
+                } else {
+                    console.log('tinhs');
                     this.toastError(result.message);
                 }
             }).catch(e => {

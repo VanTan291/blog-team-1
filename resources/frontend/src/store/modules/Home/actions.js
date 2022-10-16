@@ -62,5 +62,14 @@ export default {
         }).catch((error) => {
             return false
         });
-    }
+    },
+
+    async favorite ({}, id) {
+        return await api.get(`add-favorite-blog/${id}`).then(result => {
+            console.log('minh');
+            return result;
+        }).catch(e => {
+            console.log(e);
+        })
+    },
 };
