@@ -21,7 +21,6 @@ class BlogRequest extends BaseRequest
             // ],
             'category' => [
                 'required',
-                'string',
             ],
             'tags' => [
                 function ($attribute, $value, $fail) {
@@ -45,8 +44,8 @@ class BlogRequest extends BaseRequest
                 'required',
             ],
             'thumbnail' => [
-                'required',
-                'image'
+                $this->Update == true ? 'nullable' : 'required',
+                $this->Update == true ? 'nullable' : 'image'
             ],
         ];
     }

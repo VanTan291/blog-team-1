@@ -11,6 +11,7 @@ use Illuminate\Http\Response;
 use App\Http\Requests\Api\User\BlogRequest;
 use App\Http\Resources\BlogResource;
 use App\Models\Blog;
+use App\Http\Resources\DetailBlogResource;
 
 class BlogController extends Controller
 {
@@ -81,9 +82,16 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Blog $blog)
     {
-        //
+        if ($blog) {
+            return response()->apiSuccess([
+                'data' => new DetailBlogResource($blog),
+                'code' => Response::HTTP_OK
+            ]);
+        }
+
+        return response()->apiErrors('khong co data');
     }
 
     /**
@@ -197,5 +205,19 @@ class BlogController extends Controller
         }
 
         return response()->apiErrors($result['message']);
+    }
+
+    public function updateBlog(BlogRequest $request, Blog $blog)
+    {
+        $user = auth('api')->user();
+
+        $update = $this->blogService->updateBlog($user, $request->all(), $blog);
+        if ($update['code'] === Response::HTTP_OK) {
+            return response()->apiSuccess([
+                'message' => __('messages.create_success'),
+            ]);
+        }
+
+        return response()->apiErrors(__('messages.create_error'));
     }
 }

@@ -32,8 +32,8 @@ export default {
         .then(result => {
             console.log(result);
             if (result.code == 200) {
-                this.toastSuccess(result.message);
                 this.$router.push({ name: 'home' });
+                this.toastSuccess(result.message);
                 window.location.reload();
             }
 

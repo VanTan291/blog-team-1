@@ -43,4 +43,5 @@ Route::group(['middleware' => ['auth.user']], function () {
     Route::get('book-mark/{blog}', [BookMarkController::class, 'store']);
     Route::post('follow', [BlogController::class, 'follow']);
     Route::get('add-favorite-blog/{blog}', [FavoriteController::class, 'favorite']);
+    Route::post('update-blog/{blog}', [BlogController::class, 'updateBlog']);
 });

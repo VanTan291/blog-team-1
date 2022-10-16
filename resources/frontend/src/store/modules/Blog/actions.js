@@ -66,4 +66,45 @@ export default {
                 return false;
             });
     },
+
+    async edit({commit}, id) {
+        console.log(id);
+        return await api.get('blogs/' + id)
+        .then((response) => {
+            if (response && response != undefined) {
+                console.log(response.data)
+                commit('EDIT', response.data)
+                return response;
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+            return false;
+        });
+    },
+
+    async update({ commit }, params) {
+        console.log(params);
+        let formData = new FormData();
+        formData.append('Update', true);
+        formData.append("series", params.series ?? "");
+        formData.append("category", params.category ? params.category.id : "");
+        formData.append("tags", JSON.stringify(params.tag));
+        formData.append("title", params.title ?? "");
+        formData.append("content", params.content ?? "");
+        formData.append("thumbnail", params.thumbnail ?? "");
+        formData.append("description", params.description ?? "");
+
+        return await api.post('/update-blog/' + params.id, formData)
+            .then((response) => {
+                if (response && response != undefined) {
+                    commit("ERRORS", null);
+                }
+
+                return response;
+            })
+            .catch((error) => {
+                commit("ERRORS", error.response.data);
+            });
+    },
 };

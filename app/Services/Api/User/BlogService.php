@@ -134,6 +134,57 @@ class BlogService extends BaseService
         }
     }
 
+    public function updateBlog(User $user, $params, $blog)
+    {
+        DB::beginTransaction();
+        try {
+            if (BlogSeries::where('title', $params['series'])->exists()) {
+                $blogSeries = BlogSeries::where('title', $params['series'])->first();
+            } else if (isset($params['series']) && $params['series'] != '') {
+                $blogSeries = BlogSeries::create([
+                    'user_id' => $user->id,
+                    'title' => $params['series']
+                ]);
+            }
+
+            if (preg_match('/\bpublic\b/', $params['thumbnail']) != true) {
+                $url = Storage::disk()->put('public', $params['thumbnail']);
+            }
+
+            $blog->update([
+                'user_id' => $user->id ?? null,
+                'categories_id' => $params['category'] ?? null,
+                'series_id' => $blogSeries->id ?? null,
+                'title' => $params['title'] ?? null,
+                'content' => $params['content'] ?? null,
+                'description' => $params['description'] ?? null,
+                'thumbnail' => isset($url) ? $url : $params['thumbnail'],
+                'is_published' => self::ACTIVE
+            ]);
+
+            foreach(json_decode($params['tags']) as $item) {
+                if ($item->id == '') {
+                    $blog->tags()->create([
+                        'name' => $item->name,
+                        'status' => self::ACTIVE
+                    ]);
+                }
+            }
+
+            DB::commit();
+            return [
+                'code' => Response::HTTP_OK,
+            ];
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e);
+
+            return [
+                'code' => Response::HTTP_FORBIDDEN,
+            ];
+        }
+    }
+
      public function getListBlogHome($params)
     {
         try {

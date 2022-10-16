@@ -12,6 +12,7 @@ import Blog from '../components/pages/bloggers/blogs';
 import CreateBlog from '../components/pages/bloggers/blogs/create.vue';
 import ListBookmarks from '../components/pages/bookmarks/index.vue';
 import SetupProfile from '../components/pages/profile/setup/setup-profile.vue'
+import EditBlog from '../components/pages/bloggers/blogs/edit.vue';
 
 //
 import DetailBlog from "../components/pages/detail/detail.vue";
@@ -96,6 +97,11 @@ const routes = [
                 path: "/blogger/create-blog",
                 component: CreateBlog,
                 name: "create_blog",
+            },
+            {
+                path: "/blogger/edit-blog/:id",
+                component: EditBlog,
+                name: "edit_blog",
             },
         ],
     },

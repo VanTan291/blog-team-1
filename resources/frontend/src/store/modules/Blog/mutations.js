@@ -16,4 +16,8 @@ export default {
     LIST_BLOG(state, response) {
         state.blogs = response;
     },
+
+    EDIT(state, response) {
+        state.params = response;
+    }
 };
