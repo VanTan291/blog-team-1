@@ -20,7 +20,7 @@ export default {
             .get(`blogs?page=${params.page}`)
             .then((response) => {
                 if (response && response != undefined) {
-                    commit("LIST_BLOG", response.data.data);
+                    commit("LIST_BLOG", response.data);
                 }
             })
             .catch((error) => {

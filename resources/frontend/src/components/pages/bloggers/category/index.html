@@ -50,6 +50,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr v-if="listCategory.meta && listCategory.meta.total == 0">
+                                    <td colspan="3" class="p-3 text-center">
+                                        Không có dữ liệu...
+                                    </td>
+                                </tr>
                                 <tr v-for="cate in listCategory.data" :key="cate.id">
                                     <td>
                                         <div class=" px-2 py-1">

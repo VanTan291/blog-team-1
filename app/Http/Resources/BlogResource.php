@@ -16,6 +16,7 @@ class BlogResource extends BaseResource
         return [
             'id' => $this->id,
             'user_id' => $this->user_id,
+            'name' => $this->user->name,
             'title' => $this->title,
             'category' => $this->category->name,
             'blog_series' => $this->when($this->series, $this->series->title ?? ''),
@@ -25,7 +26,7 @@ class BlogResource extends BaseResource
             'views' => $this->views,
             'favorites' => $this->favorites,
             'tags' => $this->when($this->tags, $this->tags ?? ''),
-            'status' => $this->is_published,
+            'status' => $this->status,
             'create_date' => $create_date->diffForHumans(Carbon::now()),
             'check_bookmark' => $this->when(Bookmark::where([
                 'blog_id' => $this->id,

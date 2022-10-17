@@ -6,7 +6,11 @@
                     <h3 class="z-index-1 position-relative">Danh sách bài viết đã lưu</h3>
                 </div>
             </div>
+            {{ listBookmarks }}
             <div class="row">
+                <div class="col-lg-4 col-12 mb-4 mt-4" v-if="listBookmarks.meta listBookmarks.meta.total > 0">
+                    Không có bài viet ...
+                </div>
                 <div class="col-lg-4 col-12 mb-4 mt-4" v-for="item in listBookmarks.data" :key="item.id">
                     <div class="card card-profile mt-4">
                         <router-link :to="{ name: 'detail', params: { id: item.id } }">

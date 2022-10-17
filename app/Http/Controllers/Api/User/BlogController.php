@@ -69,11 +69,11 @@ class BlogController extends Controller
         $created = $this->blogService->createBlog($user, $request->all());
         if ($created['code'] === Response::HTTP_OK) {
             return response()->apiSuccess([
-                'message' => __('messages.create_success'),
+                'message' => __('Tạo bài viết thành công'),
             ]);
         }
 
-        return response()->apiErrors(__('messages.create_error'));
+        return response()->apiErrors(__('Tạo bài viết thất bại'));
     }
 
     /**

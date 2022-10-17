@@ -16,15 +16,20 @@
                                         Tên danh mục</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Tên nhãn</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Mô tả</th>
+                                    <!-- <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Mô tả</th> -->
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Trạng thái</th>
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr v-for="item in listBlog" :key="item.id">
+                                <tr v-if="listBlog.meta && listBlog.meta.total == 0">
+                                    <td colspan="7" class="p-3 text-center">
+                                        Không có dữ liệu....
+                                    </td>
+                                </tr>
+                                <tr v-for="item in listBlog.data" :key="item.id">
                                     <td>
                                         <div class=" px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
@@ -56,35 +61,38 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                         <div class=" px-2 py-1">
-                                            <div class="d-flex flex-column justify-content-center">
+                                            <div class="d-flex flex-column">
                                                 <p>{{ item.description }}</p>
                                             </div>
                                         </div>
-                                    </td>
+                                    </td> -->
                                     <td>
                                         <div class=" px-2 py-1">
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0">{{ item.status }}</h6>
+                                                <p class="mb-0 btn btn-outline-info btn-sm">{{ item.status }}</p>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="d-flex justify-content-center">
-                                        <button type="button" class="btn btn-facebook my-0 mx-1 p-2 f-item">
-                                            <router-link :to="{ name: 'edit_blog', params: { id: item.id } }">
-                                                <span class="btn-inner--text">Sửa</span>
-                                            </router-link>
-                                        </button>
-                                        <button type="button" @click="destroy(item.id)" class="btn btn-youtube my-0 mx-1 p-2 f-item">
-                                            <span class="btn-inner--text">Xóa</span>
-                                        </button>
+                                    <td>
+                                        <div class="">
+                                            <button type="button" class="btn btn-secondary my-0 mx-1 p-2 f-item">
+                                                <router-link :to="{ name: 'edit_blog', params: { id: item.id } }">
+                                                    <span class="btn-inner--text">Sửa</span>
+                                                </router-link>
+                                            </button>
+                                            <button type="button" @click="destroy(item.id)" class="btn btn-youtube my-0 mx-1 p-2 f-item">
+                                                <span class="btn-inner--text">Xóa</span>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="mt-5 d-flex justify-content-center">
-
+                            <pagination :data="listBlog" :size="size" @pagination-change-page="getListBlog"
+                                :limit="1"></pagination>
                         </div>
                     </div>
                 </div>

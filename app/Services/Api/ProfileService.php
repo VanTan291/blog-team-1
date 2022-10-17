@@ -62,7 +62,7 @@ class ProfileService extends BaseService
         try {
             $profile = $this->model->where('user_id', Auth::user()->id)->first();
 
-            $user = User::where('id', Auth::user()->id)->first();
+            $user = User::find(Auth::user()->id);
 
             return [
                 'status' => Response::HTTP_OK,

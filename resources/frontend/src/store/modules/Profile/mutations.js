@@ -13,5 +13,8 @@ export default {
         state.params.avatar =  response.dataUser.avatar;
         state.params.name =  response.dataUser.name;
         state.params.phone =  response.dataUser.phone;
+        state.params.number_blog =  response.dataUser.number_blog;
+        state.params.followers =  response.dataUser.followers;
+        state.params.following =  response.dataUser.following;
     }
 }

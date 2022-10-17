@@ -11,6 +11,7 @@ export default {
             param: {
                 page: 1,
             },
+            size: 'small',
         };
     },
     mixins: [utils],

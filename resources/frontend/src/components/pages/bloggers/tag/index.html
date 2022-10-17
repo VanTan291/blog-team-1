@@ -51,6 +51,11 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr v-if="listTags.meta && listTags.meta.total == 0">
+                                    <td colspan="3" class="p-3 text-center">
+                                        Không có dữ liệu...
+                                    </td>
+                                </tr>
                                 <tr v-for="tag in listTags.data" :key="tag.id">
                                     <td>
                                         <div class=" px-2 py-1">

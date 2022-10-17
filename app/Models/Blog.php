@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
+use App\Enums\BlogStatus;
 
 class Blog extends Model
 {
@@ -25,11 +26,22 @@ class Blog extends Model
         'is_published',
     ];
 
-    protected $appends = ['thumbnail'];
+    protected $appends = ['thumbnail', 'status'];
 
     public function getThumbnailUrlAttribute()
     {
         return $this->thumbnail ? asset(Storage::disk()->url($this->thumbnail)) : null;
+    }
+
+    public function getStatusAttribute()
+    {
+        if ($this->is_published == BlogStatus::ACTIVE) {
+            $text = 'Hoạt động';
+        } else {
+            $text = 'Tạm ẩn';
+        }
+
+        return $text;
     }
 
     /**
